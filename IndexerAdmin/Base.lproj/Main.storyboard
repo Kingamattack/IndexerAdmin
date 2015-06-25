@@ -13,17 +13,17 @@
                         <viewControllerLayoutGuide type="bottom" id="lWN-p7-fcC"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00q-tg-hcu">
-                                <rect key="frame" x="126" y="277" width="69" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00q-tg-hcu">
+                                <rect key="frame" x="266" y="266" width="69" height="30"/>
                                 <state key="normal" title="Utilisateur">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FG5-k4-wKh">
-                                <rect key="frame" x="110" y="338" width="100" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FG5-k4-wKh">
+                                <rect key="frame" x="250" y="304" width="100" height="30"/>
                                 <state key="normal" title="Administrateur">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -33,13 +33,18 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="FG5-k4-wKh" secondAttribute="centerX" id="3wu-WC-WRe"/>
+                            <constraint firstAttribute="centerY" secondItem="00q-tg-hcu" secondAttribute="centerY" constant="19" id="IuN-Bu-7Bg"/>
+                            <constraint firstAttribute="centerY" secondItem="FG5-k4-wKh" secondAttribute="centerY" constant="-19" id="ioA-Zb-s7a"/>
+                            <constraint firstAttribute="centerX" secondItem="00q-tg-hcu" secondAttribute="centerX" constant="-0.5" id="yBu-hO-FHt"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="26s-o5-wc3"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="465" y="1131.338028169014"/>
+            <point key="canvasLocation" x="707" y="1143"/>
         </scene>
         <!--Administration View Controller-->
         <scene sceneID="ed3-dD-qVv">
@@ -50,17 +55,26 @@
                         <viewControllerLayoutGuide type="bottom" id="2FI-Qq-y4r"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Dch-ZR-UOV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="S2o-Pk-rRZ">
-                                <rect key="frame" x="0.0" y="157" width="320" height="411"/>
+                                <rect key="frame" x="0.0" y="147" width="600" height="453"/>
                                 <connections>
                                     <outlet property="delegate" destination="qeO-bM-10D" id="3Iz-3T-Qyl"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYF-xC-7bX">
+                                <rect key="frame" x="261" y="112" width="78" height="30"/>
+                                <state key="normal" title="Delete Last">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteLast:" destination="qeO-bM-10D" eventType="touchUpInside" id="9nD-7H-Cjl"/>
+                                </connections>
+                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eb3-tN-9Cz">
-                                <rect key="frame" x="80" y="84" width="161" height="29"/>
+                                <rect key="frame" x="220" y="74" width="161" height="29"/>
                                 <segments>
                                     <segment title="Red"/>
                                     <segment title="Yellow"/>
@@ -70,13 +84,13 @@
                                     <action selector="clickZoneSelector:" destination="qeO-bM-10D" eventType="valueChanged" id="uO2-zZ-Lio"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYF-xC-7bX">
-                                <rect key="frame" x="121" y="122" width="78" height="30"/>
-                                <state key="normal" title="Delete Last">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPl-8s-Lam">
+                                <rect key="frame" x="389" y="112" width="54" height="30"/>
+                                <state key="normal" title="Validate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="deleteLast:" destination="qeO-bM-10D" eventType="touchUpInside" id="9nD-7H-Cjl"/>
+                                    <action selector="clickValidateButton:" destination="qeO-bM-10D" eventType="touchUpInside" id="qdG-V6-0ZS"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -86,8 +100,10 @@
                             <constraint firstAttribute="trailing" secondItem="S2o-Pk-rRZ" secondAttribute="trailing" id="JJG-f4-YE7"/>
                             <constraint firstAttribute="centerX" secondItem="eb3-tN-9Cz" secondAttribute="centerX" id="K1d-GX-zuD"/>
                             <constraint firstAttribute="centerX" secondItem="AYF-xC-7bX" secondAttribute="centerX" id="LE9-Pb-SAn"/>
+                            <constraint firstItem="mPl-8s-Lam" firstAttribute="leading" secondItem="AYF-xC-7bX" secondAttribute="trailing" constant="50" id="Qlf-K1-Ogi"/>
                             <constraint firstItem="S2o-Pk-rRZ" firstAttribute="top" secondItem="AYF-xC-7bX" secondAttribute="bottom" constant="5" id="XKz-lo-eUk"/>
-                            <constraint firstItem="eb3-tN-9Cz" firstAttribute="top" secondItem="Oq4-lW-CKe" secondAttribute="bottom" constant="20" id="fB8-SZ-Mpx"/>
+                            <constraint firstItem="mPl-8s-Lam" firstAttribute="baseline" secondItem="AYF-xC-7bX" secondAttribute="baseline" id="a0x-99-wu0"/>
+                            <constraint firstItem="eb3-tN-9Cz" firstAttribute="top" secondItem="Oq4-lW-CKe" secondAttribute="bottom" constant="10" id="fB8-SZ-Mpx"/>
                             <constraint firstItem="S2o-Pk-rRZ" firstAttribute="leading" secondItem="Dch-ZR-UOV" secondAttribute="leading" id="flZ-Az-aUs"/>
                             <constraint firstItem="AYF-xC-7bX" firstAttribute="top" secondItem="eb3-tN-9Cz" secondAttribute="bottom" constant="10" id="rnt-E3-4w4"/>
                         </constraints>
@@ -100,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R6Y-Mv-EAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="948" y="1131"/>
+            <point key="canvasLocation" x="1412" y="1143"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="etj-rC-37r">
@@ -111,7 +127,7 @@
                         <viewControllerLayoutGuide type="bottom" id="7HN-UG-ehh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="BXZ-On-ycg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -119,13 +135,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uUi-Kh-T7j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="948" y="375"/>
+            <point key="canvasLocation" x="1412" y="375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="baU-I0-NSq">
             <objects>
                 <navigationController id="zDc-MP-QeX" sceneMemberID="viewController">
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PNx-pL-aSE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -147,21 +162,21 @@
                         <viewControllerLayoutGuide type="bottom" id="wGg-eG-Rey"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cyL-2L-1i9">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Adresse mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U8T-4c-94w">
-                                <rect key="frame" x="88" y="254" width="145" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="jordy@imerir.com" borderStyle="roundedRect" placeholder="Adresse mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U8T-4c-94w">
+                                <rect key="frame" x="235" y="246" width="132" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mot de passe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eR6-zQ-kYc">
-                                <rect key="frame" x="88" y="318" width="145" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="jordy" borderStyle="roundedRect" placeholder="Mot de passe" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eR6-zQ-kYc">
+                                <rect key="frame" x="246" y="311" width="109" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRy-fj-gWy">
-                                <rect key="frame" x="123" y="367" width="74" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRy-fj-gWy">
+                                <rect key="frame" x="263" y="370" width="74" height="30"/>
                                 <state key="normal" title="Connexion">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -171,9 +186,16 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="eR6-zQ-kYc" secondAttribute="centerX" constant="-0.5" id="2xP-Jl-vGA"/>
+                            <constraint firstAttribute="centerY" secondItem="eR6-zQ-kYc" secondAttribute="centerY" constant="-26" id="NEH-s5-2Nt"/>
+                            <constraint firstAttribute="centerY" secondItem="YRy-fj-gWy" secondAttribute="centerY" constant="-85" id="NHY-QK-dun"/>
+                            <constraint firstAttribute="centerY" secondItem="U8T-4c-94w" secondAttribute="centerY" constant="39" id="UdB-Al-Mdj"/>
+                            <constraint firstAttribute="centerX" secondItem="U8T-4c-94w" secondAttribute="centerX" constant="-0.5" id="V8V-7S-80i"/>
+                            <constraint firstAttribute="centerX" secondItem="YRy-fj-gWy" secondAttribute="centerX" id="pHb-Hf-Rgi"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pxJ-qJ-xzR"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="connexionBTN" destination="YRy-fj-gWy" id="IDM-LU-aM8"/>
                         <outlet property="mailTF" destination="U8T-4c-94w" id="hKh-Kn-i7t"/>
@@ -184,7 +206,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TCl-cz-5P5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="465" y="375"/>
+            <point key="canvasLocation" x="707" y="375"/>
         </scene>
     </scenes>
 </document>

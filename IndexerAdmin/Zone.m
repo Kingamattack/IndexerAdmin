@@ -11,6 +11,15 @@
 
 @implementation Zone
 
+- (instancetype) init {
+    self = [super init];
+    if (self) {
+        self.used = [NSNumber numberWithInt:1];        
+        self.pointsData = [[NSMutableArray alloc] init];
+}
+    return self;
+}
+
 - (void) createZone {
     // REQUETE WEB SERVICE ADD ZONE
     

@@ -25,7 +25,8 @@
 @property IBOutlet UISegmentedControl * zoneSelector;
 
 - (IBAction)deleteLast:(id)sender;
+- (IBAction)clickValidateButton:(id)sender;
 - (IBAction)clickZoneSelector:(id)sender;
-- (void) drawPolygone;
+- (MKPolygon*) drawPolygone:(NSArray *) polygonePoints;
 
 @end
