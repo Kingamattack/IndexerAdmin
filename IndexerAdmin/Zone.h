@@ -19,6 +19,8 @@ typedef enum : NSUInteger {
     BOOL isEnable;
 }
 
+@property Color _color;
+
 - (void) createZone;
 - (void) updateZone;
 - (void) disableZone;
