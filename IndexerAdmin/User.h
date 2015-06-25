@@ -7,15 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
 
-@interface User : NSObject {
-    int userID;
-    NSString * mail;
-    NSString * password;
-    
-}
+@interface User : NSObject
 
-@property BOOL isAdmin;
+@property NSNumber *userId;
+@property NSString * mail;
+@property NSString * password;
+@property NSNumber *isAdmin;
+@property NSMutableArray *notes;
 
+- (BOOL) checkAuth : (NSString*) enteredPassword;
+- (void) create;
+
++ (void) getUserByMail: (NSString*)mail sender:(id<UserManagement>)sender;
 
 @end

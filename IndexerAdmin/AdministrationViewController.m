@@ -7,6 +7,10 @@
 //
 
 #import "AdministrationViewController.h"
+#import "Administator.h"
+#import "Zone.h"
+#import "Note.h"
+#import "AppDelegate.h"
 
 @interface AdministrationViewController () {
     CLLocationManager * locationManager;
@@ -14,6 +18,7 @@
     NSMutableArray * pointsCopy;
     NSMutableArray* points;
     MKPolygon * zone;
+    
 }
 
 @end
@@ -32,7 +37,9 @@
     points = [[NSMutableArray alloc] init];
 
     tapMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickMap)];
-    [mapView addGestureRecognizer:tapMap];
+    [self.mapView addGestureRecognizer:tapMap];
+    //[Zone getZone:@1 sender:self];
+    //[Note getAllNotesFromUser:@1 sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,20 +55,20 @@
 }
 
 - (void) locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-    mapView.showsUserLocation = YES;
+    self.mapView.showsUserLocation = YES;
 }
 
 - (void) onClickMap {
     if (zone != nil) {
-        [mapView removeOverlay:zone];
+        [self.mapView removeOverlay:zone];
     }
     
     CGPoint clickPoint = [tapMap locationInView:self.view];
-    CLLocationCoordinate2D tapPoint = [mapView convertPoint:clickPoint toCoordinateFromView:self.view];
+    CLLocationCoordinate2D tapPoint = [self.mapView convertPoint:clickPoint toCoordinateFromView:self.view];
     
     MKPointAnnotation * annotation = [[MKPointAnnotation alloc]init];
     annotation.coordinate = tapPoint;
-    [mapView addAnnotation:annotation];
+    [self.mapView addAnnotation:annotation];
     
     [points addObject:[NSValue valueWithMKCoordinate:tapPoint]];
     pointsCopy = points.mutableCopy;
@@ -74,12 +81,29 @@
     if (pointsCopy.count >= 3) {
         zone = [MKPolygon polygonWithCoordinates:pointsCArray count:points.count];
         free(pointsCArray);
-        [mapView addOverlay:zone];
+        [self.mapView addOverlay:zone];
     }
     
 }
 
-- (IBAction)deleteLast:(id)sender {
+/* ----------------- CALLBACK PROTOCOL ------------------ */
+
+- (void)getZone:(id)zone {
+    self.zoneNeeded = (Zone *)zone;
+}
+
+- (void)getNote:(id)note{
+    self.noteNeeded = (Note *)note;
+}
+
+
+- (void) getNoteList:(NSMutableArray *)notes{
+    self.user.notes = notes;
+}
+
+/* --------------- END CALLBACK PROTOCOL ---------------- */
+
+- (IBAction)deleteLast:(id)sender{
     if (points.count > 3) {
         [points removeObjectAtIndex:points.count-1];
         //[mapView removeAnnotation:mapView.annotations.lastObject-1];

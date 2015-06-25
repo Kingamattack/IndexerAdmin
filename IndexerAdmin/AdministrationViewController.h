@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Administator.h"
+#import "Zone.h"
+#import "Note.h"
 
 
-@interface AdministrationViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
-    IBOutlet MKMapView *mapView;
-}
+@interface AdministrationViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, ZoneManagement, NoteManagement>
+
+@property IBOutlet MKMapView *mapView;
+@property Administator *user;
+@property Zone* zoneNeeded;
+@property Note* noteNeeded;
 
 - (IBAction)deleteLast:(id)sender;
 

@@ -12,6 +12,6 @@
 
 @interface Administator : User
 
-+ (void) sendZone:(Zone*) aZone;
+- (void) sendZone:(Zone*) aZone;
 
 @end
