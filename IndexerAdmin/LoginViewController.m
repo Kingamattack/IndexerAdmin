@@ -7,6 +7,11 @@
 //
 
 #import "LoginViewController.h"
+#import "HomeViewController.h"
+#import "AdministrationViewController.h"
+#import "AFNetworking.h"
+#import "Client.h"
+#import "User.h"
 
 @interface LoginViewController ()
 
@@ -17,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.user = [[User alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,31 +30,51 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)clickConnexionBTN:(id)sender {
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+    NSString *mail = self.mailTF.text;
+    [User getUserByMail:mail sender:self];
 }
 
-- (IBAction)clickConnexionBTN:(id)sender {
-    // REQUETE WEB SERVICE USER/ADMIN
+/* ----------------- CALLBACK PROTOCOL ------------------ */
+
+- (void) getUser:(id)user{
+    self.user = (User *) user;
+    [self manageConnection];
+}
+
+/* ---------------- END CALLBACK PROTOCOL --------------- */
+
+- (void) manageConnection{
     
-    User * newUser = [[User alloc] init];
-    newUser.isAdmin = YES;
+    //check authentication
+    NSString *enteredPassword = self.passwordTF.text;
     
-    if (newUser.isAdmin == YES) {
-        Administator * newAdministrator = [[Administator alloc] init];
+    if(![self.user checkAuth:enteredPassword]){
+        NSLog(@"Incorrect password");
+        return;
+    }
+    
+    NSLog(@"correct password");
+    //choose action depending to usertype
+    if([self.user.isAdmin isEqualToNumber: @1]){
         [self performSegueWithIdentifier:@"goToHome" sender:self];
-    }else {
-        Client * newClient = [[Client alloc] init];
+    }
+    else{
         [self performSegueWithIdentifier:@"goToUser" sender:self];
     }
+    
 }
 
-//- (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
-//    if ([mailTF.text isEqualToString:@"MAIL"] && [passwordTF.text isEqualToString:@"PASS"]) {
-//        return YES;
-//    }else
-//        return NO;
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"goToHome"]) {
+        User * newUser = [[User alloc] init];
+        HomeViewController* vc = segue.destinationViewController;
+        vc.user = newUser;
+    }
+    else if([segue.identifier isEqualToString:@"goToUser"]){
+        
+    }
+}
 
 @end

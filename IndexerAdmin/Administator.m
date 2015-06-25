@@ -7,7 +7,14 @@
 //
 
 #import "Administator.h"
+#import "AFHTTPRequestOperationManager.h"
 
 @implementation Administator 
+
+- (void) sendZone:(Zone *)aZone{
+    
+    [aZone createZone];
+
+}
 
 @end

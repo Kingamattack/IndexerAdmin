@@ -53,23 +53,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="S2o-Pk-rRZ">
-                                <rect key="frame" x="0.0" y="178" width="320" height="390"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="S2o-Pk-rRZ">
+                                <rect key="frame" x="0.0" y="157" width="320" height="411"/>
                                 <connections>
                                     <outlet property="delegate" destination="qeO-bM-10D" id="3Iz-3T-Qyl"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYF-xC-7bX">
-                                <rect key="frame" x="121" y="140" width="78" height="30"/>
-                                <state key="normal" title="Delete Last">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deleteLast:" destination="qeO-bM-10D" eventType="touchUpInside" id="9nD-7H-Cjl"/>
-                                </connections>
-                            </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eb3-tN-9Cz">
-                                <rect key="frame" x="80" y="90" width="160" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eb3-tN-9Cz">
+                                <rect key="frame" x="80" y="84" width="161" height="29"/>
                                 <segments>
                                     <segment title="Red"/>
                                     <segment title="Yellow"/>
@@ -79,17 +70,31 @@
                                     <action selector="clickZoneSelector:" destination="qeO-bM-10D" eventType="valueChanged" id="uO2-zZ-Lio"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYF-xC-7bX">
+                                <rect key="frame" x="121" y="122" width="78" height="30"/>
+                                <state key="normal" title="Delete Last">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteLast:" destination="qeO-bM-10D" eventType="touchUpInside" id="9nD-7H-Cjl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2FI-Qq-y4r" firstAttribute="top" secondItem="S2o-Pk-rRZ" secondAttribute="bottom" id="B4f-Lk-HmL"/>
                             <constraint firstAttribute="trailing" secondItem="S2o-Pk-rRZ" secondAttribute="trailing" id="JJG-f4-YE7"/>
+                            <constraint firstAttribute="centerX" secondItem="eb3-tN-9Cz" secondAttribute="centerX" id="K1d-GX-zuD"/>
+                            <constraint firstAttribute="centerX" secondItem="AYF-xC-7bX" secondAttribute="centerX" id="LE9-Pb-SAn"/>
+                            <constraint firstItem="S2o-Pk-rRZ" firstAttribute="top" secondItem="AYF-xC-7bX" secondAttribute="bottom" constant="5" id="XKz-lo-eUk"/>
+                            <constraint firstItem="eb3-tN-9Cz" firstAttribute="top" secondItem="Oq4-lW-CKe" secondAttribute="bottom" constant="20" id="fB8-SZ-Mpx"/>
                             <constraint firstItem="S2o-Pk-rRZ" firstAttribute="leading" secondItem="Dch-ZR-UOV" secondAttribute="leading" id="flZ-Az-aUs"/>
+                            <constraint firstItem="AYF-xC-7bX" firstAttribute="top" secondItem="eb3-tN-9Cz" secondAttribute="bottom" constant="10" id="rnt-E3-4w4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vP1-c9-2fj"/>
                     <connections>
-                        <outlet property="mapView" destination="S2o-Pk-rRZ" id="DxD-qa-Aun"/>
+                        <outlet property="mapView" destination="S2o-Pk-rRZ" id="jeO-Jm-jLx"/>
                         <outlet property="zoneSelector" destination="eb3-tN-9Cz" id="97i-10-gY8"/>
                     </connections>
                 </viewController>

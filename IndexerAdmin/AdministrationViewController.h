@@ -10,14 +10,22 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Administator.h"
+#import "Zone.h"
+#import "Note.h"
+
+@interface AdministrationViewController : UIViewController
+                                                    <MKMapViewDelegate, CLLocationManagerDelegate,ZoneManagement, NoteManagement>
 
 
-@interface AdministrationViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
-    IBOutlet MKMapView *mapView;
-    IBOutlet UISegmentedControl *zoneSelector;
-}
+@property IBOutlet MKMapView *mapView;
+@property Administator * user;
+@property Zone * zoneNeeded;
+@property Note * noteNeeded;
+@property IBOutlet UISegmentedControl * zoneSelector;
 
 - (IBAction)deleteLast:(id)sender;
 - (IBAction)clickZoneSelector:(id)sender;
+- (void) drawPolygone;
 
 @end

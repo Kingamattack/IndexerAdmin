@@ -11,13 +11,15 @@
 #import "Client.h"
 #import "Administator.h"
 
-@interface LoginViewController : UIViewController {
+@interface LoginViewController : UIViewController<UserManagement>
     
-    IBOutlet UITextField *mailTF;
-    IBOutlet UITextField *passwordTF;
-    IBOutlet UIButton *connexionBTN;
-}
+@property IBOutlet UITextField *mailTF;
+@property IBOutlet UITextField *passwordTF;
+@property IBOutlet UIButton *connexionBTN;
+
+@property User *user;
 
 - (IBAction)clickConnexionBTN:(id)sender;
+- (void )manageConnection;
 
 @end

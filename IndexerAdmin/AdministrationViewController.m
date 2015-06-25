@@ -7,6 +7,10 @@
 //
 
 #import "AdministrationViewController.h"
+#import "Administator.h"
+#import "Zone.h"
+#import "Note.h"
+#import "AppDelegate.h"
 
 @interface AdministrationViewController () {
     CLLocationManager * locationManager;
@@ -27,18 +31,18 @@
 
     redZone = nil;
     points = [[NSMutableArray alloc] init];
-    [zoneSelector setSelectedSegmentIndex:0];
+    [self.zoneSelector setSelectedSegmentIndex:0];
     annotationArray = [[NSMutableArray alloc] init];
     
-    mapView.showsUserLocation = YES;
+    self.mapView.showsUserLocation = YES;
     
-    mapView.delegate = self;
+    self.mapView.delegate = self;
     locationManager = [[CLLocationManager alloc]init];
     locationManager.delegate = self;
     [locationManager requestWhenInUseAuthorization];
     
     tapMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickMap)];
-    [mapView addGestureRecognizer:tapMap];
+    [self.mapView addGestureRecognizer:tapMap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,9 +54,9 @@
     MKPolygonRenderer * mapZone = [[MKPolygonRenderer alloc] initWithPolygon:overlay];
     mapZone.alpha = 0.3;
     
-    if (zoneSelector.selectedSegmentIndex == 0)
+    if (self.zoneSelector.selectedSegmentIndex == 0)
         mapZone.fillColor = [UIColor redColor];
-    else if (zoneSelector.selectedSegmentIndex == 1)
+    else if (self.zoneSelector.selectedSegmentIndex == 1)
         mapZone.fillColor = [UIColor yellowColor];
     else
         mapZone.fillColor = [UIColor greenColor];
@@ -61,16 +65,15 @@
 }
 
 - (void) onClickMap {
-    if (redZone != nil) {
-        [mapView removeOverlay:redZone];
-    }
-
+    if (redZone != nil)
+        [self.mapView removeOverlay:redZone];
+    
     CGPoint clickPoint = [tapMap locationInView:self.view];
-    CLLocationCoordinate2D tapPoint = [mapView convertPoint:clickPoint toCoordinateFromView:self.view];
+    CLLocationCoordinate2D tapPoint = [self.mapView convertPoint:clickPoint toCoordinateFromView:self.view];
     
     MKPointAnnotation * marker = [[MKPointAnnotation alloc]init];
     marker.coordinate = tapPoint;
-    [mapView addAnnotation:marker];
+    [self.mapView addAnnotation:marker];
     
     [annotationArray addObject:marker];
     
@@ -81,18 +84,16 @@
 - (IBAction)deleteLast:(id)sender {
     if (points.count != 0) {
         [points removeObjectAtIndex:points.count-1];
-        [mapView removeAnnotation:annotationArray.lastObject];
+        [self.mapView removeAnnotation:annotationArray.lastObject];
         [annotationArray removeLastObject];
         
-        [mapView removeOverlay:redZone];
+        [self.mapView removeOverlay:redZone];
         [self drawPolygone];
     }
 }
 
 - (IBAction)clickZoneSelector:(id)sender {
-    if (zoneSelector.selectedSegmentIndex == 1) {
-        
-    }
+    
 }
 
 - (void) drawPolygone {
@@ -106,17 +107,26 @@
     if (pointsCopy.count >= 3) {
         redZone = [MKPolygon polygonWithCoordinates:pointsCArray count:points.count];
         free(pointsCArray);
-        [mapView addOverlay:redZone];
+
+        [self.mapView addOverlay:redZone];
     }
 }
 
-- (Zone *) saveZone:(MKPolygonRenderer *) aPolygon withColor:(UIColor *) polygonColor {
-    Zone * newZone = [[Zone alloc] init];
-    
+/* ----------------- CALLBACK PROTOCOL ------------------ */
 
-    
-    return newZone;
+- (void)getZone:(id)zone {
+    self.zoneNeeded = (Zone *)zone;
+}
+
+- (void)getNote:(id)note{
+    self.noteNeeded = (Note *)note;
 }
 
 
+- (void) getNoteList:(NSMutableArray *)notes{
+    self.user.notes = notes;
+}
+
+/* --------------- END CALLBACK PROTOCOL ---------------- */
+    
 @end

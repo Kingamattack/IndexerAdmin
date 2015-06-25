@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "User.h"
 
 @interface HomeViewController : UIViewController
+
+@property User* user;
+
+- (void)setUser:(User*) user;
 
 
 @end

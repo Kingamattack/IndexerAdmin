@@ -7,22 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
 
 typedef enum : NSUInteger {
     RED, YELLOW, GREEN,
 } Color;
 
-@interface Zone : NSObject {
-    int zoneID;
-    Color zoneColor;
-    NSMutableDictionary * perimeter;
-    BOOL isEnable;
-}
+@interface Zone : NSObject
+@property NSNumber *zoneId;
+@property NSString *zoneColor;
+@property NSString * perimeter; //format json but sended as string to server
+@property NSNumber *used;
 
 @property Color _color;
 
 - (void) createZone;
-- (void) updateZone;
 - (void) disableZone;
+- (void) updateZone;
++ (void) getZone:(NSNumber*)zoneId sender:(id<ZoneManagement>)sender;
 
 @end
