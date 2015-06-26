@@ -22,6 +22,7 @@
 
 + (void) getNote:(NSNumber*)noteId sender:(id<NoteManagement>)sender;
 + (void) getAllNotesFromUser:(NSNumber*)userId sender:(id<NoteManagement>)sender;
++ (void) getAllNotesFromZone:(NSNumber*)zoneId sender:(id<NoteManagement>)sender;
 + (void) getAllNotesFromUser:(NSNumber*)userId AndZone:(NSNumber*)zoneId sender:(id<NoteManagement>)sender;
 
 

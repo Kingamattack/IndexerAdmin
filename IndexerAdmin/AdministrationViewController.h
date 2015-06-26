@@ -15,7 +15,7 @@
 #import "Note.h"
 
 @interface AdministrationViewController : UIViewController
-                                                    <MKMapViewDelegate, CLLocationManagerDelegate,ZoneManagement, NoteManagement>
+        <MKMapViewDelegate, CLLocationManagerDelegate,ZoneManagement, NoteManagement, UITableViewDataSource, UITableViewDelegate>
 
 
 @property IBOutlet MKMapView *mapView;
@@ -23,6 +23,7 @@
 @property Zone * zoneNeeded;
 @property Note * noteNeeded;
 @property IBOutlet UISegmentedControl * zoneSelector;
+@property (strong, nonatomic) IBOutlet UITableView *zoneTableView;
 
 - (IBAction)deleteLast:(id)sender;
 - (IBAction)clickValidateButton:(id)sender;

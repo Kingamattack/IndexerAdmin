@@ -36,7 +36,7 @@
      success:^(AFHTTPRequestOperation *operation, id responseObject) {
          NSLog(@"JSON: %@", responseObject);
          NSDictionary *jsonZone = responseObject;
-         currentObject.zoneId = [jsonZone objectForKey:@"id"];
+         currentObject.zoneID = [jsonZone objectForKey:@"id"];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"ErrorPost: %@", error);
@@ -45,7 +45,7 @@
 
 - (void) updateZone {
     NSString *url = @"http://pierre-mar.net/Zone_indexer/";
-    NSDictionary *parameters = @{@"updateZone":@1, @"id":self.zoneId, @"color":self.zoneColor, @"perimeter":self.perimeter,  @"used":self.used};
+    NSDictionary *parameters = @{@"updateZone":@1, @"id":self.zoneID, @"color":self.zoneColor, @"perimeter":self.perimeter,  @"used":self.used};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
@@ -62,7 +62,7 @@
 
 - (void) disableZone {
     NSString *url = @"http://pierre-mar.net/Zone_indexer/";
-    NSDictionary *parameters = @{@"disableZone":@1, @"id":self.zoneId};
+    NSDictionary *parameters = @{@"disableZone":@1, @"id":self.zoneID};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
@@ -90,10 +90,41 @@
          NSLog(@"JSON: %@", responseObject);
          NSDictionary *jsonZone = responseObject;
          Zone *zone = [[Zone alloc] init];
-         zone.zoneId = zoneId;
+         zone.zoneID = zoneId;
          zone.zoneColor = [jsonZone objectForKey:@"color"];
          zone.perimeter = [jsonZone objectForKey:@"perimeter"];
          [sender getZone:zone];
+     }
+     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"ErrorPost: %@", error);
+     }];
+}
+
++ (void) getAllZonesWithSender:(id<ZoneManagement>)sender{
+    NSString *url = @"http://pierre-mar.net/Zone_indexer/";
+    NSDictionary *parameters = @{@"getAllZones":@1};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager
+     POST:url
+     parameters:parameters
+     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         NSMutableArray *allZones = [[NSMutableArray alloc] init];
+         
+         NSLog(@"JSON: %@", responseObject);
+         NSArray *jsonZones = responseObject;
+         
+         for(int i = 0; i < jsonZones.count; i++){
+             NSDictionary * jsonZone = [jsonZones objectAtIndex:i];
+             Zone *zone = [[Zone alloc] init];
+             zone.zoneID = [jsonZone objectForKey:@"id"];
+             zone.zoneColor = [jsonZone objectForKey:@"color"];
+             zone.perimeter = [jsonZone objectForKey:@"perimeter"];
+             [allZones addObject:zone];
+         }
+         
+        [sender getAllZones:allZones];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"ErrorPost: %@", error);

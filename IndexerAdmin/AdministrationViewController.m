@@ -16,6 +16,7 @@
     CLLocationManager * locationManager;
     UITapGestureRecognizer * tapMap;
     NSMutableArray * markerArray;
+    NSMutableArray * zoneArray;
     
     NSMutableArray * redPoints;
     MKPolygon * redPolygon;
@@ -37,6 +38,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+    self.zoneTableView.delegate = self;
+    self.zoneTableView.dataSource = self;
+    
     redZone = [[Zone alloc] init];
     yellowZone = [[Zone alloc] init];
     greenZone = [[Zone alloc] init];
@@ -44,6 +48,8 @@
     redPoints = [[NSMutableArray alloc] init];
     yellowPoints = [[NSMutableArray alloc] init];
     greenPoints = [[NSMutableArray alloc] init];
+    
+    zoneArray = [[NSMutableArray alloc] init];
     
     [self.zoneSelector setSelectedSegmentIndex:0];
     markerArray = [[NSMutableArray alloc] init];
@@ -57,6 +63,9 @@
     
     tapMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickMap)];
     [self.mapView addGestureRecognizer:tapMap];
+    
+    [Note getAllNotesFromZone:@1 sender:self];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -157,20 +166,25 @@
             redZone.zoneColor = @"RED";
             redZone.perimeter = [self parseTab:redZone.pointsData];
             [redZone createZone];
+            [zoneArray addObject:redZone];
         }
     }else if (self.zoneSelector.selectedSegmentIndex == 1) {
         if (yellowPolygon != nil) {
             yellowZone.zoneColor = @"YELLOW";
             yellowZone.perimeter = [self parseTab:yellowZone.pointsData];
             [yellowZone createZone];
+            [zoneArray addObject:yellowZone];
         }
     } else if (self.zoneSelector.selectedSegmentIndex == 2) {
         if (greenPolygon != nil) {
             greenZone.zoneColor = @"GREEN";
             greenZone.perimeter = [self parseTab:greenZone.pointsData];
             [greenZone createZone];
+            [zoneArray addObject:greenZone];
         }
     }
+    
+    [self performSegueWithIdentifier:@"goToNotes" sender:self];
 }
 
 - (IBAction)clickZoneSelector:(id)sender {
@@ -212,10 +226,14 @@
     return stringFinal;
 }
 
-/* ----------------- CALLBACK PROTOCOL ------------------ */
+#pragma mark CallBack Protocol
 
 - (void)getZone:(id)zone {
     self.zoneNeeded = (Zone *)zone;
+}
+
+-(void)getAllZones:(NSMutableArray *)allZones{
+    NSLog(@"%@", allZones);
 }
 
 - (void)getNote:(id)note{
@@ -226,6 +244,22 @@
     self.user.notes = notes;
 }
 
-/* --------------- END CALLBACK PROTOCOL ---------------- */
+- (void) getNoteListFromZone:(NSMutableArray *)allNotes{
+    NSLog(@"%@", allNotes);
+}
+
+#pragma mark TableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return zoneArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString * cellID = @"zoneCell";
+    
+    UITableViewCell * aCell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
+    aCell.detailTextLabel.text = @"ZONE";
+    return aCell;
+}
     
 @end

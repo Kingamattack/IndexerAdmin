@@ -117,6 +117,36 @@
          NSLog(@"ErrorPost: %@", error);
      }];
 }
++ (void) getAllNotesFromZone:(NSNumber*)zoneId sender:(id<NoteManagement>)sender{
+    NSString *url = @"http://pierre-mar.net/Zone_indexer/";
+    NSDictionary *parameters = @{@"getAllNotesFromZone":@1, @"idZone":zoneId};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager
+     POST:url
+     parameters:parameters
+     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         NSLog(@"JSON: %@", responseObject);
+         NSMutableArray *notes = [[NSMutableArray alloc] init];
+         NSArray *jsonNotes = responseObject;
+         
+         for(int i = 0; i < jsonNotes.count; i++){
+             NSDictionary *jsonNote = [jsonNotes objectAtIndex:i];
+             Note *note = [[Note alloc] init];
+             note.noteId = [jsonNote objectForKey:@"id"];
+             note.content = [jsonNote objectForKey:@"text"];
+             note.ownerId = [jsonNote objectForKey:@"ownerId"];
+             note.zoneId = [jsonNote objectForKey:@"zoneId"];
+             [notes addObject:note];
+         }
+         
+         [sender getNoteListFromZone:notes];
+     }
+     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"ErrorPost: %@", error);
+     }];
+}
 + (void) getAllNotesFromUser:(NSNumber*)userId AndZone:(NSNumber*)zoneId sender:(id<NoteManagement>)sender{
     NSString *url = @"http://pierre-mar.net/Zone_indexer/";
     NSDictionary *parameters = @{@"getAllNotesFromUser":@1, @"idUser":userId, @"idZone":zoneId};

@@ -19,6 +19,7 @@
 @required
 
 - (void) getZone:(id)zone;
+- (void) getAllZones:(NSMutableArray *) allZones;
 
 @end
 @protocol NoteManagement <NSObject>
@@ -27,6 +28,7 @@
 
 - (void) getNote:(id)note;
 - (void) getNoteList:(NSMutableArray*)notes;
+- (void) getNoteListFromZone:(NSMutableArray *)allNotes;
 
 @end
 @protocol UserManagement <NSObject>

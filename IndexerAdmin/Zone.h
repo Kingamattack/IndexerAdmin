@@ -13,16 +13,18 @@
 
 
 @interface Zone : NSObject
-@property NSNumber *zoneId;
-@property NSString *zoneColor;
+@property NSNumber * zoneID;
+@property NSString * zoneName;
+@property NSString * zoneColor;
 @property NSString * perimeter;
 @property NSMutableArray * pointsData; //format json but sended as string to server
-@property NSNumber *used;
+@property NSNumber * used;
 
 - (void) createZone;
 - (void) disableZone;
 - (void) updateZone;
 + (void) getZone:(NSNumber*)zoneId sender:(id<ZoneManagement>)sender;
++ (void) getAllZonesWithSender:(id<ZoneManagement>)sender;
 
 - (instancetype) init;
 

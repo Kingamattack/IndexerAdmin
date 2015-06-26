@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zDc-MP-QeX">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Home View Controller-->
@@ -49,6 +50,7 @@
         <!--Administration View Controller-->
         <scene sceneID="ed3-dD-qVv">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R6Y-Mv-EAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="qeO-bM-10D" customClass="AdministrationViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Oq4-lW-CKe"/>
@@ -59,20 +61,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="S2o-Pk-rRZ">
-                                <rect key="frame" x="0.0" y="147" width="600" height="453"/>
+                                <rect key="frame" x="0.0" y="144" width="600" height="456"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="2jz-gd-9b9"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2jz-gd-9b9"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="qeO-bM-10D" id="3Iz-3T-Qyl"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYF-xC-7bX">
-                                <rect key="frame" x="261" y="112" width="78" height="30"/>
-                                <state key="normal" title="Delete Last">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="deleteLast:" destination="qeO-bM-10D" eventType="touchUpInside" id="9nD-7H-Cjl"/>
-                                </connections>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eb3-tN-9Cz">
                                 <rect key="frame" x="220" y="74" width="161" height="29"/>
                                 <segments>
@@ -85,7 +86,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPl-8s-Lam">
-                                <rect key="frame" x="389" y="112" width="54" height="30"/>
+                                <rect key="frame" x="244" y="112" width="54" height="30"/>
                                 <state key="normal" title="Validate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -93,18 +94,27 @@
                                     <action selector="clickValidateButton:" destination="qeO-bM-10D" eventType="touchUpInside" id="qdG-V6-0ZS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYF-xC-7bX">
+                                <rect key="frame" x="116" y="112" width="78" height="30"/>
+                                <state key="normal" title="Delete Last">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteLast:" destination="qeO-bM-10D" eventType="touchUpInside" id="9nD-7H-Cjl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="2FI-Qq-y4r" firstAttribute="top" secondItem="S2o-Pk-rRZ" secondAttribute="bottom" id="B4f-Lk-HmL"/>
-                            <constraint firstAttribute="trailing" secondItem="S2o-Pk-rRZ" secondAttribute="trailing" id="JJG-f4-YE7"/>
                             <constraint firstAttribute="centerX" secondItem="eb3-tN-9Cz" secondAttribute="centerX" id="K1d-GX-zuD"/>
-                            <constraint firstAttribute="centerX" secondItem="AYF-xC-7bX" secondAttribute="centerX" id="LE9-Pb-SAn"/>
                             <constraint firstItem="mPl-8s-Lam" firstAttribute="leading" secondItem="AYF-xC-7bX" secondAttribute="trailing" constant="50" id="Qlf-K1-Ogi"/>
-                            <constraint firstItem="S2o-Pk-rRZ" firstAttribute="top" secondItem="AYF-xC-7bX" secondAttribute="bottom" constant="5" id="XKz-lo-eUk"/>
+                            <constraint firstItem="AYF-xC-7bX" firstAttribute="leading" secondItem="Dch-ZR-UOV" secondAttribute="leadingMargin" constant="100" id="VkU-vt-cfR"/>
+                            <constraint firstItem="S2o-Pk-rRZ" firstAttribute="top" secondItem="Oq4-lW-CKe" secondAttribute="bottom" constant="80" id="Y2d-rL-zy3"/>
                             <constraint firstItem="mPl-8s-Lam" firstAttribute="baseline" secondItem="AYF-xC-7bX" secondAttribute="baseline" id="a0x-99-wu0"/>
                             <constraint firstItem="eb3-tN-9Cz" firstAttribute="top" secondItem="Oq4-lW-CKe" secondAttribute="bottom" constant="10" id="fB8-SZ-Mpx"/>
                             <constraint firstItem="S2o-Pk-rRZ" firstAttribute="leading" secondItem="Dch-ZR-UOV" secondAttribute="leading" id="flZ-Az-aUs"/>
+                            <constraint firstAttribute="trailing" secondItem="S2o-Pk-rRZ" secondAttribute="trailing" id="lhl-f6-aul"/>
                             <constraint firstItem="AYF-xC-7bX" firstAttribute="top" secondItem="eb3-tN-9Cz" secondAttribute="bottom" constant="10" id="rnt-E3-4w4"/>
                         </constraints>
                     </view>
@@ -112,11 +122,29 @@
                     <connections>
                         <outlet property="mapView" destination="S2o-Pk-rRZ" id="jeO-Jm-jLx"/>
                         <outlet property="zoneSelector" destination="eb3-tN-9Cz" id="97i-10-gY8"/>
+                        <segue destination="BJZ-ph-qns" kind="show" identifier="goToNotes" id="q5E-Bw-twj"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="R6Y-Mv-EAO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1412" y="1143"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="aXH-4f-LV1">
+            <objects>
+                <viewController id="BJZ-ph-qns" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mq0-nd-gyx"/>
+                        <viewControllerLayoutGuide type="bottom" id="OqI-XQ-rin"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ix0-v3-wgo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WZb-bm-DvP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2108" y="1143"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="etj-rC-37r">
