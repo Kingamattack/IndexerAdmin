@@ -12,6 +12,7 @@
     MKPolygon * polygon;
     NSMutableArray * noteArray;
     NSMutableArray * polygonPoints;
+    Note * note;
 }
 @end
 
@@ -24,6 +25,8 @@
     noteArray = [[NSMutableArray alloc] init];
     polygonPoints = [[NSMutableArray alloc] init];
     polygon = [self drawPolygone:polygonPoints];
+    self.zoneNameTF.text = self.selectedZone.zoneName;
+    [Note getAllNotesFromZone:self.selectedZone.zoneID sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,8 +39,12 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString * cellID = @"noteID";
-    UITableViewCell * aCell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    NoteTableViewCell *aCell = (NoteTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"noteID" forIndexPath:indexPath];
+    
+    Note * aNote = [noteArray objectAtIndex:indexPath.row];
+    aCell.noteZoneName.text = aNote.noteName;
+    aCell.noteZoneContent.text = aNote.content;
+    //aCell.separatorView.layer.frame.size.width = aCell.noteZoneName.layer.frame.size.width;
 
     return aCell;
 }
@@ -85,14 +92,45 @@
 }
 
 - (IBAction)clickUpdateButton:(id)sender {
+    //if ([self.updateButton.titleLabel.text isEqualToString:@"Modifier"]) {
+        
+        NSLog(@"Je suis là");
+        self.selectedZone.zoneName = self.zoneNameTF.text;
+        [self.selectedZone updateZone];
+   // }
     
 }
 
 - (IBAction)clickDeleteButton:(id)sender {
     [self.selectedZone disableZone];
     
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Suppression zone"
+                                                     message:[NSString stringWithFormat:@"Zone %@ supprimée.", self.selectedZone.zoneName]
+                                                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+
     [self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) getNote:(id)note {
+    
+}
+
+- (void) getNoteList:(NSMutableArray*)notes {
+    
+}
+
+- (void) didDownloadNoteListFromZone:(NSMutableArray *)allNotes {
+
+    NSLog(@" NOTEQ: %lu", (unsigned long)allNotes.count);
+    
+    for (int i = 0; i < [allNotes count]; i++) {
+        Note * newNote = [allNotes objectAtIndex:i];
+        [noteArray addObject:newNote];
+    }
+    
+    [self.noteTableView reloadData];
 }
 
 @end

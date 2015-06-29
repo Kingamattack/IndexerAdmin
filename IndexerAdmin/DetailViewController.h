@@ -10,14 +10,17 @@
 #import "Note.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import "NoteTableViewCell.h"
 #import "Administator.h"
 #import "Zone.h"
 
-@interface DetailViewController : UIViewController <MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface DetailViewController : UIViewController <MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NoteManagement>
 
 @property Zone * selectedZone;
 @property (strong, nonatomic) IBOutlet UITableView * noteTableView;
 @property (strong, nonatomic) IBOutlet MKMapView * zoneMapView;
+@property (strong, nonatomic) IBOutlet UIButton *updateButton;
+@property (strong, nonatomic) IBOutlet UITextField *zoneNameTF;
 
 - (IBAction)clickUpdateButton:(id)sender;
 - (IBAction)clickDeleteButton:(id)sender;

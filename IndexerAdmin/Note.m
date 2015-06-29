@@ -138,10 +138,11 @@
              note.content = [jsonNote objectForKey:@"text"];
              note.ownerId = [jsonNote objectForKey:@"ownerId"];
              note.zoneId = [jsonNote objectForKey:@"zoneId"];
+             note.noteName = [jsonNote objectForKey:@"title"];
              [notes addObject:note];
          }
          
-         [sender getNoteListFromZone:notes];
+         [sender didDownloadNoteListFromZone:notes];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"ErrorPost: %@", error);

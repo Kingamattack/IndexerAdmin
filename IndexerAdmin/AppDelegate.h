@@ -29,7 +29,7 @@
 
 - (void) getNote:(id)note;
 - (void) getNoteList:(NSMutableArray*)notes;
-- (void) getNoteListFromZone:(NSMutableArray *)allNotes;
+- (void) didDownloadNoteListFromZone:(NSMutableArray *)allNotes;
 
 @end
 @protocol UserManagement <NSObject>

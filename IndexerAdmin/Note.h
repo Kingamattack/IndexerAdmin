@@ -11,10 +11,10 @@
 
 @interface Note : NSObject
 
-@property NSNumber *noteId;
-@property NSNumber *ownerId;
-@property NSNumber *zoneId;
-@property NSString *content;
+@property NSNumber * noteId;
+@property NSNumber * ownerId;
+@property NSNumber * zoneId;
+@property NSString * content;
 @property NSString * noteName;
 
 - (void) createNote;

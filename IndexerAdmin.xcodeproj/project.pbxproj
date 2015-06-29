@@ -31,6 +31,7 @@
 		949538F01B38A2DD00D4319C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 949538EF1B38A2DD00D4319C /* Note.m */; };
 		949538F51B38B02F00D4319C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 949538F41B38B02F00D4319C /* MapKit.framework */; };
 		949BA2251B3DA0B90026A9A8 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949BA2241B3DA0B90026A9A8 /* DetailViewController.m */; };
+		94E5004B1B4145A500367EB9 /* NoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E5004A1B4145A500367EB9 /* NoteTableViewCell.m */; };
 		94F417F41B39358C0032ECCB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F417F31B39358C0032ECCB /* LoginViewController.m */; };
 		94F417F81B393D1F0032ECCB /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F417F71B393D1F0032ECCB /* Client.m */; };
 		94F417FC1B393DA10032ECCB /* AdministrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F417FB1B393DA10032ECCB /* AdministrationViewController.m */; };
@@ -94,6 +95,8 @@
 		949538F41B38B02F00D4319C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		949BA2231B3DA0B90026A9A8 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		949BA2241B3DA0B90026A9A8 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		94E500491B4145A500367EB9 /* NoteTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteTableViewCell.h; sourceTree = "<group>"; };
+		94E5004A1B4145A500367EB9 /* NoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteTableViewCell.m; sourceTree = "<group>"; };
 		94F417F21B39358C0032ECCB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		94F417F31B39358C0032ECCB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		94F417F61B393D1F0032ECCB /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
@@ -161,6 +164,8 @@
 			children = (
 				949BA2231B3DA0B90026A9A8 /* DetailViewController.h */,
 				949BA2241B3DA0B90026A9A8 /* DetailViewController.m */,
+				94E500491B4145A500367EB9 /* NoteTableViewCell.h */,
+				94E5004A1B4145A500367EB9 /* NoteTableViewCell.m */,
 			);
 			name = "Détails";
 			sourceTree = "<group>";
@@ -407,6 +412,7 @@
 				94F417F81B393D1F0032ECCB /* Client.m in Sources */,
 				949538BE1B38914000D4319C /* AppDelegate.m in Sources */,
 				94F417F41B39358C0032ECCB /* LoginViewController.m in Sources */,
+				94E5004B1B4145A500367EB9 /* NoteTableViewCell.m in Sources */,
 				94F417FC1B393DA10032ECCB /* AdministrationViewController.m in Sources */,
 				94933B9D1B3D45BD000FE6B5 /* ZonesViewController.m in Sources */,
 				943343571B3BE62100C5B265 /* AFURLSessionManager.m in Sources */,

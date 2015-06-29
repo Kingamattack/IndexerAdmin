@@ -119,7 +119,14 @@
         zone.perimeter = [self parseTab:zone.pointsData];
         zone.zoneName = self.zoneNameTF.text;
         [zone createZone:self];
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Création zone"
+                                                         message:[NSString stringWithFormat:@"Zone %@ créee.", zone.zoneName]
+                                                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
+    
+    [self performSegueWithIdentifier:@"goToZones" sender:self];
 }
 
 - (IBAction)clickZoneSelector:(id)sender {
