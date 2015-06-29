@@ -15,6 +15,7 @@
 @property NSNumber *ownerId;
 @property NSNumber *zoneId;
 @property NSString *content;
+@property NSString * noteName;
 
 - (void) createNote;
 - (void) updateNote;

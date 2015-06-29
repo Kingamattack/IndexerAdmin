@@ -16,19 +16,10 @@
     CLLocationManager * locationManager;
     UITapGestureRecognizer * tapMap;
     NSMutableArray * markerArray;
-    NSMutableArray * zoneArray;
     
-    NSMutableArray * redPoints;
-    MKPolygon * redPolygon;
-    Zone * redZone;
-    
-    NSMutableArray * yellowPoints;
-    MKPolygon * yellowPolygon;
-    Zone * yellowZone;
-    
-    NSMutableArray * greenPoints;
-    MKPolygon * greenPolygon;
-    Zone * greenZone;
+    NSMutableArray * polygonPoints;
+    MKPolygon * polygon;
+    Zone * zone;
 }
 @end
 
@@ -37,19 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
-    self.zoneTableView.delegate = self;
-    self.zoneTableView.dataSource = self;
     
-    redZone = [[Zone alloc] init];
-    yellowZone = [[Zone alloc] init];
-    greenZone = [[Zone alloc] init];
-    
-    redPoints = [[NSMutableArray alloc] init];
-    yellowPoints = [[NSMutableArray alloc] init];
-    greenPoints = [[NSMutableArray alloc] init];
-    
-    zoneArray = [[NSMutableArray alloc] init];
+    polygonPoints = [[NSMutableArray alloc] init];
+    zone = [[Zone alloc] init];
     
     [self.zoneSelector setSelectedSegmentIndex:0];
     markerArray = [[NSMutableArray alloc] init];
@@ -63,9 +44,15 @@
     
     tapMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickMap)];
     [self.mapView addGestureRecognizer:tapMap];
-    
-    [Note getAllNotesFromZone:@1 sender:self];
-    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [polygonPoints removeAllObjects];
+    [markerArray removeAllObjects];
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    [self.mapView removeOverlays:self.mapView.overlays];
+    self.zoneNameTF.text = nil;
+    self.validateButton.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,90 +88,38 @@
     newCoordinate.longitude = [NSString stringWithFormat:@"%f", tapPoint.longitude];
     newCoordinate.latitude = [NSString stringWithFormat:@"%f", tapPoint.latitude];
     
-    if (self.zoneSelector.selectedSegmentIndex == 0) {
-        if (redPolygon != nil)
-            [self.mapView removeOverlay:redPolygon];
-        
-        [redPoints addObject:[NSValue valueWithMKCoordinate:tapPoint]];
-        redPolygon = [self drawPolygone:redPoints];
-        [redZone.pointsData addObject:newCoordinate];
-        NSLog(@"RED: %@", [redZone.pointsData objectAtIndex:0]);
-    }
-    else if (self.zoneSelector.selectedSegmentIndex == 1) {
-        if (yellowPolygon != nil)
-            [self.mapView removeOverlay:yellowPolygon];
-        
-        [yellowPoints addObject:[NSValue valueWithMKCoordinate:tapPoint]];
-        yellowPolygon = [self drawPolygone:yellowPoints];
-         [yellowZone.pointsData addObject:newCoordinate];
-    }
-    else {
-        if (greenPolygon != nil)
-            [self.mapView removeOverlay:greenPolygon];
-        
-        [greenPoints addObject:[NSValue valueWithMKCoordinate:tapPoint]];
-        greenPolygon = [self drawPolygone:greenPoints];
-         [greenZone.pointsData addObject:newCoordinate];
-    }
+    if (polygon != nil)
+        [self.mapView removeOverlay:polygon];
+    
+    [polygonPoints addObject:[NSValue valueWithMKCoordinate:tapPoint]];
+    polygon = [self drawPolygone:polygonPoints];
+    [zone.pointsData addObject:newCoordinate];
 }
 
 - (IBAction)deleteLast:(id)sender {
-    
-    if (self.zoneSelector.selectedSegmentIndex == 0) {
-        if (redPoints.count != 0) {
-            [redPoints removeObjectAtIndex:redPoints.count-1];
-            [self.mapView removeAnnotation:markerArray.lastObject];
-            [markerArray removeLastObject];
-
-            [self.mapView removeOverlay:redPolygon];
-            redPolygon = [self drawPolygone:redPoints];
-        }
-    } else if (self.zoneSelector.selectedSegmentIndex == 1) {
-        if (yellowPoints.count != 0) {
-            [yellowPoints removeObjectAtIndex:yellowPoints.count-1];
-            [self.mapView removeAnnotation:markerArray.lastObject];
-            [markerArray removeLastObject];
-            
-            [self.mapView removeOverlay:yellowPolygon];
-            yellowPolygon = [self drawPolygone:yellowPoints];
-        }
-    } else if (self.zoneSelector.selectedSegmentIndex == 2){
-        if (greenPoints.count != 0) {
-            [greenPoints removeObjectAtIndex:greenPoints.count-1];
-            [self.mapView removeAnnotation:markerArray.lastObject];
-            [markerArray removeLastObject];
-            
-            [self.mapView removeOverlay:greenPolygon];
-            greenPolygon = [self drawPolygone:greenPoints];
-        }
+    if (polygonPoints.count != 0) {
+        [polygonPoints removeObjectAtIndex:polygonPoints.count-1];
+        [self.mapView removeAnnotation:markerArray.lastObject];
+        [markerArray removeLastObject];
+        
+        [self.mapView removeOverlay:polygon];
+        polygon = [self drawPolygone:polygonPoints];
     }
 }
 
 - (IBAction)clickValidateButton:(id)sender {
-    if (self.zoneSelector.selectedSegmentIndex == 0) {
-        if (redPolygon != nil) {
-            redZone.zoneColor = @"RED";
-            redZone.perimeter = [self parseTab:redZone.pointsData];
-            [redZone createZone];
-            [zoneArray addObject:redZone];
-        }
-    }else if (self.zoneSelector.selectedSegmentIndex == 1) {
-        if (yellowPolygon != nil) {
-            yellowZone.zoneColor = @"YELLOW";
-            yellowZone.perimeter = [self parseTab:yellowZone.pointsData];
-            [yellowZone createZone];
-            [zoneArray addObject:yellowZone];
-        }
-    } else if (self.zoneSelector.selectedSegmentIndex == 2) {
-        if (greenPolygon != nil) {
-            greenZone.zoneColor = @"GREEN";
-            greenZone.perimeter = [self parseTab:greenZone.pointsData];
-            [greenZone createZone];
-            [zoneArray addObject:greenZone];
-        }
+    if (![self.zoneNameTF.text isEqual:nil] && polygon != nil) {
+        if (self.zoneSelector.selectedSegmentIndex == 0)
+            zone.zoneColor = @"RED";
+        else if (self.zoneSelector.selectedSegmentIndex == 1)
+            zone.zoneColor = @"YELLOW";
+        else if (self.zoneSelector.selectedSegmentIndex == 2)
+            zone.zoneColor = @"GREEN";
+        
+        zone.perimeter = [self parseTab:zone.pointsData];
+        zone.zoneName = self.zoneNameTF.text;
+        [zone createZone:self];
     }
-    
-    [self performSegueWithIdentifier:@"goToNotes" sender:self];
 }
 
 - (IBAction)clickZoneSelector:(id)sender {
@@ -207,6 +142,14 @@
     return polygone;
 }
 
+- (IBAction)clickZonesButton:(id)sender {
+    [self performSegueWithIdentifier:@"goToZones" sender:self];
+}
+
+- (IBAction)clickZoneNameTF:(id)sender {
+    self.validateButton.enabled = YES;
+}
+
 - (NSString *) parseTab:(NSArray *) aTab {
     NSString * stringFinal = @"[";
     
@@ -226,40 +169,18 @@
     return stringFinal;
 }
 
-#pragma mark CallBack Protocol
+#pragma mark Zone Protocole
 
-- (void)getZone:(id)zone {
-    self.zoneNeeded = (Zone *)zone;
+- (void) zoneCreated {
+
 }
 
--(void)getAllZones:(NSMutableArray *)allZones{
-    NSLog(@"%@", allZones);
-}
-
-- (void)getNote:(id)note{
-    self.noteNeeded = (Note *)note;
-}
-
-- (void) getNoteList:(NSMutableArray *)notes{
-    self.user.notes = notes;
-}
-
-- (void) getNoteListFromZone:(NSMutableArray *)allNotes{
-    NSLog(@"%@", allNotes);
-}
-
-#pragma mark TableView
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return zoneArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString * cellID = @"zoneCell";
+- (void) getZone:(id)zone {
     
-    UITableViewCell * aCell = [tableView dequeueReusableCellWithIdentifier:cellID forIndexPath:indexPath];
-    aCell.detailTextLabel.text = @"ZONE";
-    return aCell;
 }
+
+- (void) getAllZones:(NSMutableArray *) allZones{
     
+}
+
 @end

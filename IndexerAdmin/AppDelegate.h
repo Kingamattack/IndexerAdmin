@@ -20,6 +20,7 @@
 
 - (void) getZone:(id)zone;
 - (void) getAllZones:(NSMutableArray *) allZones;
+- (void) zoneCreated;
 
 @end
 @protocol NoteManagement <NSObject>

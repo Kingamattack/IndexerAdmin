@@ -13,7 +13,7 @@
 
 - (void) sendZone:(Zone *)aZone{
     
-    [aZone createZone];
+    [aZone createZone:self];
 
 }
 

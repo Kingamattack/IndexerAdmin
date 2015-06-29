@@ -20,7 +20,7 @@
 @property NSMutableArray * pointsData; //format json but sended as string to server
 @property NSNumber * used;
 
-- (void) createZone;
+- (void) createZone:(id<ZoneManagement>)sender;
 - (void) disableZone;
 - (void) updateZone;
 + (void) getZone:(NSNumber*)zoneId sender:(id<ZoneManagement>)sender;

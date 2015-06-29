@@ -20,11 +20,11 @@
     return self;
 }
 
-- (void) createZone {
+- (void) createZone:(id<ZoneManagement>)sender{
     // REQUETE WEB SERVICE ADD ZONE
     
     NSString *url = @"http://pierre-mar.net/Zone_indexer/";
-    NSDictionary *parameters = @{@"createZone":@1, @"color":self.zoneColor, @"perimeter":self.perimeter};
+    NSDictionary *parameters = @{@"createZone":@1, @"color":self.zoneColor, @"perimeter":self.perimeter, @"title":self.zoneName};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
@@ -37,6 +37,7 @@
          NSLog(@"JSON: %@", responseObject);
          NSDictionary *jsonZone = responseObject;
          currentObject.zoneID = [jsonZone objectForKey:@"id"];
+         [sender zoneCreated];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"ErrorPost: %@", error);
@@ -45,7 +46,7 @@
 
 - (void) updateZone {
     NSString *url = @"http://pierre-mar.net/Zone_indexer/";
-    NSDictionary *parameters = @{@"updateZone":@1, @"id":self.zoneID, @"color":self.zoneColor, @"perimeter":self.perimeter,  @"used":self.used};
+    NSDictionary *parameters = @{@"updateZone":@1, @"id":self.zoneID, @"color":self.zoneColor, @"perimeter":self.perimeter,  @"used":self.used, @"title":self.zoneName};
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
@@ -92,7 +93,18 @@
          Zone *zone = [[Zone alloc] init];
          zone.zoneID = zoneId;
          zone.zoneColor = [jsonZone objectForKey:@"color"];
-         zone.perimeter = [jsonZone objectForKey:@"perimeter"];
+         zone.zoneName = [jsonZone objectForKey:@"title"];
+         zone.used = [jsonZone objectForKey:@"used"];
+         NSArray* perimeter = [jsonZone objectForKey:@"perimeter"];
+         
+         for(int i = 0; i < perimeter.count; i++){
+             NSDictionary *coord = [perimeter objectAtIndex:i];
+             Coordinates *coordinate = [[Coordinates alloc] init];
+             coordinate.latitude = [coord objectForKey:@"lat"];
+             coordinate.longitude = [coord objectForKey:@"long"];
+             [zone.pointsData addObject:coordinate];
+         }
+         
          [sender getZone:zone];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -120,7 +132,19 @@
              Zone *zone = [[Zone alloc] init];
              zone.zoneID = [jsonZone objectForKey:@"id"];
              zone.zoneColor = [jsonZone objectForKey:@"color"];
-             zone.perimeter = [jsonZone objectForKey:@"perimeter"];
+             zone.zoneName = [jsonZone objectForKey:@"title"];
+             zone.used = [jsonZone objectForKey:@"used"];
+             NSArray* perimeter = [jsonZone objectForKey:@"perimeter"];
+             
+             for(int i = 0; i < perimeter.count; i++){
+                 NSDictionary *coord = [perimeter objectAtIndex:i];
+                 Coordinates *coordinate = [[Coordinates alloc] init];
+                 coordinate.latitude = [coord objectForKey:@"lat"];
+                 coordinate.longitude = [coord objectForKey:@"long"];
+                 [zone.pointsData addObject:coordinate];
+             }
+             
+             NSLog(@"PERIMETER: %@", zone.pointsData);
              [allZones addObject:zone];
          }
          

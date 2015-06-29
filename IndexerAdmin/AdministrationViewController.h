@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Jordy Kingama. All rights reserved.
 //
 
-#import "Zone.h"
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
@@ -14,20 +13,21 @@
 #import "Zone.h"
 #import "Note.h"
 
-@interface AdministrationViewController : UIViewController
-        <MKMapViewDelegate, CLLocationManagerDelegate,ZoneManagement, NoteManagement, UITableViewDataSource, UITableViewDelegate>
+@interface AdministrationViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, ZoneManagement>
 
 
-@property IBOutlet MKMapView *mapView;
-@property Administator * user;
-@property Zone * zoneNeeded;
-@property Note * noteNeeded;
+@property IBOutlet MKMapView * mapView;
 @property IBOutlet UISegmentedControl * zoneSelector;
-@property (strong, nonatomic) IBOutlet UITableView *zoneTableView;
+@property (strong, nonatomic) IBOutlet UITextField * zoneNameTF;
+@property (strong, nonatomic) IBOutlet UIButton * validateButton;
 
 - (IBAction)deleteLast:(id)sender;
 - (IBAction)clickValidateButton:(id)sender;
 - (IBAction)clickZoneSelector:(id)sender;
+- (IBAction)clickZonesButton:(id)sender;
+- (IBAction)clickZoneNameTF:(id)sender;
+
 - (MKPolygon*) drawPolygone:(NSArray *) polygonePoints;
+
 
 @end
