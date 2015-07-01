@@ -29,30 +29,41 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    polygonPoints = [[NSMutableArray alloc] init];
-    zone = [[Zone alloc] init];
+    if (polygon == nil) {
+        
+        polygonPoints = [[NSMutableArray alloc] init];
+        zone = [[Zone alloc] init];
+        
+        [self.zoneSelector setSelectedSegmentIndex:0];
+        markerArray = [[NSMutableArray alloc] init];
+        
+        self.mapView.showsUserLocation = YES;
+        self.mapView.delegate = self;
+        
+        locationManager = [[CLLocationManager alloc]init];
+        locationManager.delegate = self;
+        [locationManager requestWhenInUseAuthorization];
+        
+        tapMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickMap)];
+        [self.mapView addGestureRecognizer:tapMap];
+    }else
+        polygon = nil;
     
-    [self.zoneSelector setSelectedSegmentIndex:0];
-    markerArray = [[NSMutableArray alloc] init];
     
-    self.mapView.showsUserLocation = YES;
-    self.mapView.delegate = self;
-    
-    locationManager = [[CLLocationManager alloc]init];
-    locationManager.delegate = self;
-    [locationManager requestWhenInUseAuthorization];
-    
-    tapMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onClickMap)];
-    [self.mapView addGestureRecognizer:tapMap];
 }
 
+
 - (void) viewWillAppear:(BOOL)animated {
+    /**
     [polygonPoints removeAllObjects];
     [markerArray removeAllObjects];
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.mapView removeOverlays:self.mapView.overlays];
+    
+    
     self.zoneNameTF.text = nil;
     self.validateButton.enabled = NO;
+     **/
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,7 +119,12 @@
 }
 
 - (IBAction)clickValidateButton:(id)sender {
-    if (![self.zoneNameTF.text isEqual:nil] && polygon != nil) {
+    if (self.zoneNameTF.text.length < 1 || polygon == nil) {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Erreur création"
+                                                         message:@"Zone incomplete." delegate:nil
+                                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }else {
         if (self.zoneSelector.selectedSegmentIndex == 0)
             zone.zoneColor = @"RED";
         else if (self.zoneSelector.selectedSegmentIndex == 1)
@@ -124,9 +140,21 @@
                                                          message:[NSString stringWithFormat:@"Zone %@ créee.", zone.zoneName]
                                                         delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-    }
+        
+        [self performSegueWithIdentifier:@"goToZones" sender:self];
+        
+        [polygonPoints removeAllObjects];
+        [markerArray removeAllObjects];
+        [self.mapView removeAnnotations:self.mapView.annotations];
+        [self.mapView removeOverlays:self.mapView.overlays];
+        
+        [zone.pointsData removeAllObjects];
+        
+        
+        self.zoneNameTF.text = nil;
+        self.validateButton.enabled = NO;
     
-    [self performSegueWithIdentifier:@"goToZones" sender:self];
+    }
 }
 
 - (IBAction)clickZoneSelector:(id)sender {
