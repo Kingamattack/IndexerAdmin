@@ -33,8 +33,9 @@
 		94F417F41B39358C0032ECCB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F417F31B39358C0032ECCB /* LoginViewController.m */; };
 		94F417FC1B393DA10032ECCB /* AdministrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F417FB1B393DA10032ECCB /* AdministrationViewController.m */; };
 		94F6AEA81B4573AD003A4F90 /* appli_ic.png in Resources */ = {isa = PBXBuildFile; fileRef = 94F6AEA71B4573AD003A4F90 /* appli_ic.png */; };
-		94F6AEAC1B4578D3003A4F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94F6AEAB1B4578D3003A4F90 /* Images.xcassets */; };
 		94F6AEB11B459070003A4F90 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F6AEB01B459070003A4F90 /* HomeViewController.m */; };
+		94F6AEB31B45A8F3003A4F90 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 94F6AEB21B45A8F3003A4F90 /* Icon.png */; };
+		94F6AEB61B45A9A1003A4F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94F6AEB51B45A9A1003A4F90 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,9 +100,10 @@
 		94F417FA1B393DA10032ECCB /* AdministrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdministrationViewController.h; sourceTree = "<group>"; };
 		94F417FB1B393DA10032ECCB /* AdministrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdministrationViewController.m; sourceTree = "<group>"; };
 		94F6AEA71B4573AD003A4F90 /* appli_ic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appli_ic.png; sourceTree = "<group>"; };
-		94F6AEAB1B4578D3003A4F90 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		94F6AEAF1B459070003A4F90 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		94F6AEB01B459070003A4F90 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		94F6AEB21B45A8F3003A4F90 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		94F6AEB51B45A9A1003A4F90 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,7 +202,7 @@
 				949538C21B38914000D4319C /* Main.storyboard */,
 				949538C71B38914000D4319C /* LaunchScreen.xib */,
 				949538B81B38914000D4319C /* Supporting Files */,
-				94F6AEAB1B4578D3003A4F90 /* Images.xcassets */,
+				94F6AEB51B45A9A1003A4F90 /* Images.xcassets */,
 			);
 			path = IndexerAdmin;
 			sourceTree = "<group>";
@@ -289,6 +291,7 @@
 		94F6AEA61B4573A0003A4F90 /* Ressources */ = {
 			isa = PBXGroup;
 			children = (
+				94F6AEB21B45A8F3003A4F90 /* Icon.png */,
 				94F6AEA71B4573AD003A4F90 /* appli_ic.png */,
 			);
 			name = Ressources;
@@ -389,7 +392,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				94F6AEA81B4573AD003A4F90 /* appli_ic.png in Resources */,
-				94F6AEAC1B4578D3003A4F90 /* Images.xcassets in Resources */,
+				94F6AEB61B45A9A1003A4F90 /* Images.xcassets in Resources */,
+				94F6AEB31B45A8F3003A4F90 /* Icon.png in Resources */,
 				949538C41B38914000D4319C /* Main.storyboard in Resources */,
 				949538C91B38914000D4319C /* LaunchScreen.xib in Resources */,
 			);

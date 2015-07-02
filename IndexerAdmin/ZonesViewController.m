@@ -108,4 +108,19 @@
     [self.zonesTableView reloadData];
 }
 
+#pragma mark Zone Protocole
+
+- (void) zoneCreated {
+    
+}
+
+- (void)zoneWasEnable:(BOOL)statut {
+    
+}
+
+- (void)zoneWasDisable:(BOOL)statut {
+    
+}
+
+
 @end

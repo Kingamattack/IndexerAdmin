@@ -210,4 +210,27 @@
     [self.noteTableView reloadData];
 }
 
+#pragma mark Note Protocole
+
+- (void)noteListWasGetting:(NSMutableArray *)notes {
+    
+}
+
+- (void)getAllZones:(NSMutableArray *)allZones {
+    
+}
+
+- (void)zoneWasGetting:(id)zone {
+    
+}
+
+- (void)getNote:(id)note {
+    
+}
+
+- (void)zoneCreated {
+    
+}
+
+
 @end
