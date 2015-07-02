@@ -6,21 +6,33 @@
 //  Copyright (c) 2015 Jordy Kingama. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "User.h"
-#import "Client.h"
+#import <UIKit/UIKit.h>
 #import "Administator.h"
+#import "AFNetworking.h"
+#import "HomeViewController.h"
+#import "AdministrationViewController.h"
+
 
 @interface LoginViewController : UIViewController<UserManagement>
-    
-@property IBOutlet UITextField *mailTF;
-@property IBOutlet UITextField *passwordTF;
-@property IBOutlet UIButton *connexionBTN;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *loader;
 
-@property User *user;
+@property User * user;
+@property IBOutlet UITextField * mailTF;
+@property IBOutlet UITextField * passwordTF;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView * loader;
 
+/**
+ *
+ *  Launch the connection to the web service to check
+ *
+ */
 - (IBAction)clickConnexionBTN:(id)sender;
-- (void )manageConnection;
+
+/**
+ *
+ *  Manage the connection and send the user to the good View
+ *
+ */
+- (void)manageConnection;
 
 @end

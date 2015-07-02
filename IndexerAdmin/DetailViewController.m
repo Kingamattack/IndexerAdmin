@@ -22,11 +22,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // Check the zone status (enable, disable) and update the 'deleteButton' title
     if ([self.selectedZone.used isEqual:@0]) {
-        [self.deleteButton setTitle:@"Activer zone" forState:UIControlStateNormal];
-        [self.deleteButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        [self.disableButton setTitle:@"Activer zone" forState:UIControlStateNormal];
+        [self.disableButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
     }
     
+    // Manager the user location
     self.zoneMapView.showsUserLocation = YES;
     self.zoneMapView.delegate = self;
     
@@ -35,6 +37,8 @@
     polygon = [self drawPolygone:polygonPoints];
     self.zoneNameTF.text = self.selectedZone.zoneName;
     [self zoomToFitMapAnnotations];
+    
+    // Get the notes bind to the selected zone
     [Note getAllNotesFromZone:self.selectedZone.zoneID sender:self];
 }
 
@@ -42,6 +46,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [noteArray count];
@@ -61,7 +67,54 @@
     return @"Notes de la zone";
 }
 
-- (void) zoomToFitMapAnnotations {
+#pragma Map Protocole
+
+- (MKPolygon*)drawPolygone:(NSMutableArray *)polygonePoints {
+    MKPolygon* polygone = nil;
+    
+    // Save the coordinates create by the user click
+    CLLocationCoordinate2D * coordinatesPoints = malloc(sizeof(CLLocationCoordinate2D) * self.selectedZone.pointsData.count);
+    
+    for (int i = 0; i < self.selectedZone.pointsData.count; i++) {
+        Coordinates * newCoordinates = [self.selectedZone.pointsData objectAtIndex:i];
+        
+        CLLocationCoordinate2D coordinate2D = CLLocationCoordinate2DMake(newCoordinates.latitude.floatValue, newCoordinates.longitude.floatValue);
+        MKPointAnnotation * marker = [[MKPointAnnotation alloc] init];
+        marker.coordinate = coordinate2D;
+        
+        coordinatesPoints[i] = coordinate2D;
+        [polygonePoints addObject:[NSValue valueWithMKCoordinate:coordinate2D]];
+        [self.zoneMapView addAnnotation:marker];
+    }
+    
+    // Create and add a polygon on the map when there are at least 3 points
+    polygon = [MKPolygon polygonWithCoordinates:coordinatesPoints count:polygonePoints.count];
+    [self.zoneMapView addOverlay:polygon];
+    
+    free(coordinatesPoints);
+    return polygone;
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay {
+    
+    // Draw on the map the previous polygon
+    MKPolygonRenderer * mapZone = [[MKPolygonRenderer alloc] initWithPolygon:overlay];
+    mapZone.alpha = 0.3;
+    
+    // Change the polygon color by checking the selected segment
+    if ([self.selectedZone.zoneColor isEqualToString:@"RED"])
+        mapZone.fillColor = [UIColor redColor];
+    else if ([self.selectedZone.zoneColor isEqualToString:@"YELLOW"])
+        mapZone.fillColor = [UIColor yellowColor];
+    else
+        mapZone.fillColor = [UIColor greenColor];
+    
+    return mapZone;
+}
+
+- (void)zoomToFitMapAnnotations {
+    
+    // Check if there are annotations on the map
     if([self.zoneMapView.annotations count] == 0)
         return;
     
@@ -91,43 +144,7 @@
     [self.zoneMapView setRegion:region animated:YES];
 }
 
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay {
-    MKPolygonRenderer * mapZone = [[MKPolygonRenderer alloc] initWithPolygon:overlay];
-    mapZone.alpha = 0.3;
-    
-    if ([self.selectedZone.zoneColor isEqualToString:@"RED"])
-        mapZone.fillColor = [UIColor redColor];
-    else if ([self.selectedZone.zoneColor isEqualToString:@"YELLOW"])
-        mapZone.fillColor = [UIColor yellowColor];
-    else
-        mapZone.fillColor = [UIColor greenColor];
-    
-    return mapZone;
-}
-
-- (MKPolygon*) drawPolygone:(NSMutableArray *) polygonePoints {
-    MKPolygon* polygone = nil;
-    
-    CLLocationCoordinate2D * coordinatesPoints = malloc(sizeof(CLLocationCoordinate2D) * self.selectedZone.pointsData.count);
-    
-    for (int i = 0; i < self.selectedZone.pointsData.count; i++) {
-        Coordinates * newCoordinates = [self.selectedZone.pointsData objectAtIndex:i];
-        
-        CLLocationCoordinate2D coordinate2D = CLLocationCoordinate2DMake(newCoordinates.latitude.floatValue, newCoordinates.longitude.floatValue);
-        MKPointAnnotation * marker = [[MKPointAnnotation alloc] init];
-        marker.coordinate = coordinate2D;
-        
-        coordinatesPoints[i] = coordinate2D;
-        [polygonePoints addObject:[NSValue valueWithMKCoordinate:coordinate2D]];
-        [self.zoneMapView addAnnotation:marker];
-    }
-    
-    polygon = [MKPolygon polygonWithCoordinates:coordinatesPoints count:polygonePoints.count];
-    [self.zoneMapView addOverlay:polygon];
- 
-    free(coordinatesPoints);
-    return polygone;
-}
+#pragma Boutons
 
 - (IBAction)clickUpdateButton:(id)sender {
     if (self.updateButton.titleLabel.text.length > 1) {
@@ -139,44 +156,51 @@
                                                          message:[NSString stringWithFormat:@"Zone %@ modifiée.", self.selectedZone.zoneName]
                                                         delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        
     }
 }
 
-- (IBAction)clickDeleteButton:(id)sender {
+- (IBAction)clickDisableButton:(id)sender {
+    
+    if ([self.selectedZone.used isEqual:@0])
+        [self.selectedZone enableZone:self];
+    else
+        [self.selectedZone disableZone:self];
+    
+}
+
+#pragma Zone Protocole
+
+- (void)zoneWasDisable:(BOOL)statut {
     UIAlertView * alert;
     
-    if ([self.selectedZone.used isEqual:@0]) {
-        
-        [self.selectedZone enableZone];
-        alert = [[UIAlertView alloc] initWithTitle:@"Activation zone"
-                                           message:[NSString stringWithFormat:@"Zone %@ activée.", self.selectedZone.zoneName]
-                                          delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    }else {
-        
-        [self.selectedZone disableZone];
+    if (statut) {
         alert = [[UIAlertView alloc] initWithTitle:@"Désactivation zone"
                                            message:[NSString stringWithFormat:@"Zone %@ désactivée.", self.selectedZone.zoneName]
                                           delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [alert show];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
-    
-    [alert show];
-
-    [self.navigationController popViewControllerAnimated:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void) getNote:(id)note {
+- (void)zoneWasEnable:(BOOL)statut {
+    UIAlertView * alert;
     
+    if (statut) {
+        alert = [[UIAlertView alloc] initWithTitle:@"Activation zone"
+                                           message:[NSString stringWithFormat:@"Zone %@ activée.", self.selectedZone.zoneName]
+                                          delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        
+        [alert show];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }    
 }
 
-- (void) getNoteList:(NSMutableArray*)notes {
-    
-}
-
-- (void) didDownloadNoteListFromZone:(NSMutableArray *)allNotes {
-
-    NSLog(@" NOTES: %lu", (unsigned long)allNotes.count);
+- (void)didDownloadNoteListFromZone:(NSMutableArray *)allNotes {
     
     for (int i = 0; i < [allNotes count]; i++) {
         Note * newNote = [allNotes objectAtIndex:i];

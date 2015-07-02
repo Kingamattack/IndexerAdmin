@@ -21,8 +21,8 @@
 @property NSNumber * used;
 
 - (void) createZone:(id<ZoneManagement>)sender;
-- (void) disableZone;
-- (void) enableZone;
+- (void) disableZone:(id<ZoneManagement>)sender;
+- (void) enableZone:(id<ZoneManagement>)sender;
 - (void) updateZone;
 - (void) perimeterToString;
 + (void) getZone:(NSNumber*)zoneId sender:(id<ZoneManagement>)sender;

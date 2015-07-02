@@ -7,7 +7,6 @@
 //
 
 #import "Administator.h"
-#import "AFHTTPRequestOperationManager.h"
 
 @implementation Administator 
 

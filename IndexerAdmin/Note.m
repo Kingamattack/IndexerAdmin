@@ -111,7 +111,7 @@
              note.zoneId = [jsonNote objectForKey:@"zoneId"];
              [notes addObject:note];
          }
-         [sender getNoteList:notes];
+         [sender noteListWasGetting:notes];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"ErrorPost: %@", error);
@@ -170,7 +170,7 @@
              note.zoneId = [jsonNote objectForKey:@"zoneId"];
              [notes addObject:note];
          }
-         [sender getNoteList:notes];
+         [sender noteListWasGetting:notes];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"ErrorPost: %@", error);

@@ -61,7 +61,7 @@
      }];
 }
 
-- (void) disableZone {
+- (void) disableZone:(id<ZoneManagement>) sender {
     NSString *url = @"http://pierre-mar.net/Zone_indexer/";
     NSDictionary *parameters = @{@"disableZone":@1, @"id":self.zoneID};
     
@@ -72,13 +72,15 @@
      parameters:parameters
      success:^(AFHTTPRequestOperation *operation, id responseObject) {
          NSLog(@"JSON: %@", responseObject);
+         [sender zoneWasDisable:true];
+         
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"ErrorPost: %@", error);
      }];
 }
 
-- (void) enableZone {
+- (void) enableZone:(id<ZoneManagement>) sender {
     NSString *url = @"http://pierre-mar.net/Zone_indexer/";
     NSDictionary *parameters = @{@"enableZone":@1, @"id":self.zoneID};
     
@@ -89,6 +91,7 @@
      parameters:parameters
      success:^(AFHTTPRequestOperation *operation, id responseObject) {
          NSLog(@"JSON: %@", responseObject);
+         [sender zoneWasEnable:true];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"ErrorPost: %@", error);
@@ -141,7 +144,7 @@
          }
          
          [zone perimeterToString];
-         [sender getZone:zone];
+         [sender zoneWasGetting:zone];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          NSLog(@"ErrorPost: %@", error);

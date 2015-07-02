@@ -7,7 +7,6 @@
 //
 
 #import "HomeViewController.h"
-#import "User.h"
 
 @interface HomeViewController ()
 @end

@@ -12,23 +12,36 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-
 @end
+
+/**
+ *
+ * Protocol used for all class which need tu use Zone methods
+ *
+ */
 @protocol ZoneManagement <NSObject>
 
 @required
 
-- (void) getZone:(id)zone;
+- (void) zoneWasGetting:(id)zone;
 - (void) getAllZones:(NSMutableArray *) allZones;
 - (void) zoneCreated;
+- (void) zoneWasDisable:(BOOL) statut;
+- (void) zoneWasEnable:(BOOL) statut;
 
 @end
+
+/**
+ *
+ * Protocol used for all class which need tu use Zone methods
+ *
+ */
 @protocol NoteManagement <NSObject>
 
 @required
 
 - (void) getNote:(id)note;
-- (void) getNoteList:(NSMutableArray*)notes;
+- (void) noteListWasGetting:(NSMutableArray*)notes;
 - (void) didDownloadNoteListFromZone:(NSMutableArray *)allNotes;
 
 @end

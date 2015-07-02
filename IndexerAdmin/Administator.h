@@ -9,9 +9,10 @@
 #import "User.h"
 #import "Zone.h"
 #import <Foundation/Foundation.h>
+#import "AFHTTPRequestOperationManager.h"
 
 @interface Administator : User
 
-- (void) sendZone:(Zone*) aZone;
+- (void) sendZone:(Zone *) aZone;
 
 @end

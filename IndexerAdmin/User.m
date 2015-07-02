@@ -7,11 +7,10 @@
 //
 
 #import "User.h"
-#import "AFHTTPRequestOperationManager.h"
 
 @implementation User
 
-- (BOOL) checkAuth: (NSString*) enteredPassword {
+- (BOOL) checkAuth: (NSString *) enteredPassword {
     if([self.password isEqualToString:enteredPassword]){
         return true;
     }
@@ -20,7 +19,7 @@
     }
 }
 
-- (void) create{
+- (void) create {
     
     NSString *url = @"http://pierre-mar.net/Zone_indexer/";
     NSDictionary *parameters = @{@"createUser":@1, @"mail":self.mail, @"pass":self.password, @"isAdmin":self.isAdmin};

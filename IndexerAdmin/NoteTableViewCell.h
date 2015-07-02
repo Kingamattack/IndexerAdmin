@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface NoteTableViewCell : UITableViewCell
-@property (strong, nonatomic) IBOutlet UILabel *noteZoneName;
-@property (strong, nonatomic) IBOutlet UILabel *noteZoneContent;
-@property (strong, nonatomic) IBOutlet UIView *separatorView;
+
+@property (strong, nonatomic) IBOutlet UILabel * noteZoneName;
+@property (strong, nonatomic) IBOutlet UILabel * noteZoneContent;
+@property (strong, nonatomic) IBOutlet UIView * separatorView;
 
 @end

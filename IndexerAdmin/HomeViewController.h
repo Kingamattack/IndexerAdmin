@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 Jordy Kingama. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "User.h"
+#import <UIKit/UIKit.h>
 
 @interface HomeViewController : UIViewController
 
-@property User* user;
+@property User * user;
 
-- (void)setUser:(User*) user;
+- (void)setUser:(User *) user;
 
 
 @end

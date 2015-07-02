@@ -7,11 +7,6 @@
 //
 
 #import "LoginViewController.h"
-#import "HomeViewController.h"
-#import "AdministrationViewController.h"
-#import "AFNetworking.h"
-#import "Client.h"
-#import "User.h"
 
 @interface LoginViewController ()
 
@@ -35,23 +30,31 @@
 - (IBAction)clickConnexionBTN:(id)sender {
 
     NSString * mail = self.mailTF.text;
+    
+    // Check if the user with this mail exist
     [User getUserByMail:mail sender:self];
     [self.loader startAnimating];
 }
 
-/* ----------------- CALLBACK PROTOCOL ------------------ */
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"goToHome"]) {
+        User * newUser = [[User alloc] init];
+        HomeViewController * vc = segue.destinationViewController;
+        vc.user = newUser;
+    } 
+}
 
-- (void) getUser:(id)user{
+#pragma mark CallBack Protocole
+
+- (void) getUser:(id)user {
     self.user = (User *) user;
     [self manageConnection];
 }
 
-/* ---------------- END CALLBACK PROTOCOL --------------- */
-
-- (void) manageConnection{
+- (void) manageConnection {
     
-    //check authentication
-    NSString *enteredPassword = self.passwordTF.text;
+    // Check if the password match with the mail
+    NSString * enteredPassword = self.passwordTF.text;
     
     if(![self.user checkAuth:enteredPassword]){
         NSLog(@"Incorrect password");
@@ -59,26 +62,14 @@
     }
     
     NSLog(@"correct password");
-    //choose action depending to usertype
-    if([self.user.isAdmin isEqualToNumber: @1]){
+    // Display the administrator or the user View
+    if([self.user.isAdmin isEqualToNumber: @1]) {
         [self performSegueWithIdentifier:@"goToHome" sender:self];
-    }
-    else{
+    } else {
         [self performSegueWithIdentifier:@"goToUser" sender:self];
     }
     
     [self.loader stopAnimating];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"goToHome"]) {
-        User * newUser = [[User alloc] init];
-        HomeViewController* vc = segue.destinationViewController;
-        vc.user = newUser;
-    }
-    else if([segue.identifier isEqualToString:@"goToUser"]){
-        
-    }
 }
 
 @end

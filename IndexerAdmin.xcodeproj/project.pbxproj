@@ -20,9 +20,7 @@
 		94933B9D1B3D45BD000FE6B5 /* ZonesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94933B9C1B3D45BD000FE6B5 /* ZonesViewController.m */; };
 		949538BB1B38914000D4319C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 949538BA1B38914000D4319C /* main.m */; };
 		949538BE1B38914000D4319C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 949538BD1B38914000D4319C /* AppDelegate.m */; };
-		949538C11B38914000D4319C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949538C01B38914000D4319C /* HomeViewController.m */; };
 		949538C41B38914000D4319C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 949538C21B38914000D4319C /* Main.storyboard */; };
-		949538C61B38914000D4319C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 949538C51B38914000D4319C /* Images.xcassets */; };
 		949538C91B38914000D4319C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 949538C71B38914000D4319C /* LaunchScreen.xib */; };
 		949538D51B38914000D4319C /* IndexerAdminTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 949538D41B38914000D4319C /* IndexerAdminTests.m */; };
 		949538E71B3894D300D4319C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 949538E61B3894D300D4319C /* User.m */; };
@@ -33,8 +31,10 @@
 		949BA2251B3DA0B90026A9A8 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 949BA2241B3DA0B90026A9A8 /* DetailViewController.m */; };
 		94E5004B1B4145A500367EB9 /* NoteTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E5004A1B4145A500367EB9 /* NoteTableViewCell.m */; };
 		94F417F41B39358C0032ECCB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F417F31B39358C0032ECCB /* LoginViewController.m */; };
-		94F417F81B393D1F0032ECCB /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F417F71B393D1F0032ECCB /* Client.m */; };
 		94F417FC1B393DA10032ECCB /* AdministrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F417FB1B393DA10032ECCB /* AdministrationViewController.m */; };
+		94F6AEA81B4573AD003A4F90 /* appli_ic.png in Resources */ = {isa = PBXBuildFile; fileRef = 94F6AEA71B4573AD003A4F90 /* appli_ic.png */; };
+		94F6AEAC1B4578D3003A4F90 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94F6AEAB1B4578D3003A4F90 /* Images.xcassets */; };
+		94F6AEB11B459070003A4F90 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F6AEB01B459070003A4F90 /* HomeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,10 +76,7 @@
 		949538BA1B38914000D4319C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		949538BC1B38914000D4319C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		949538BD1B38914000D4319C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		949538BF1B38914000D4319C /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		949538C01B38914000D4319C /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		949538C31B38914000D4319C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		949538C51B38914000D4319C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		949538C81B38914000D4319C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		949538CE1B38914000D4319C /* IndexerAdminTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IndexerAdminTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		949538D31B38914000D4319C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -99,10 +96,12 @@
 		94E5004A1B4145A500367EB9 /* NoteTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteTableViewCell.m; sourceTree = "<group>"; };
 		94F417F21B39358C0032ECCB /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		94F417F31B39358C0032ECCB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		94F417F61B393D1F0032ECCB /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
-		94F417F71B393D1F0032ECCB /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
 		94F417FA1B393DA10032ECCB /* AdministrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdministrationViewController.h; sourceTree = "<group>"; };
 		94F417FB1B393DA10032ECCB /* AdministrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdministrationViewController.m; sourceTree = "<group>"; };
+		94F6AEA71B4573AD003A4F90 /* appli_ic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appli_ic.png; sourceTree = "<group>"; };
+		94F6AEAB1B4578D3003A4F90 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		94F6AEAF1B459070003A4F90 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		94F6AEB01B459070003A4F90 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +172,7 @@
 		949538AC1B38914000D4319C = {
 			isa = PBXGroup;
 			children = (
+				94F6AEA61B4573A0003A4F90 /* Ressources */,
 				9433433B1B3BE60200C5B265 /* AFNetworking */,
 				949538F41B38B02F00D4319C /* MapKit.framework */,
 				949538B71B38914000D4319C /* IndexerAdmin */,
@@ -198,9 +198,9 @@
 				949538BC1B38914000D4319C /* AppDelegate.h */,
 				949538BD1B38914000D4319C /* AppDelegate.m */,
 				949538C21B38914000D4319C /* Main.storyboard */,
-				949538C51B38914000D4319C /* Images.xcassets */,
 				949538C71B38914000D4319C /* LaunchScreen.xib */,
 				949538B81B38914000D4319C /* Supporting Files */,
+				94F6AEAB1B4578D3003A4F90 /* Images.xcassets */,
 			);
 			path = IndexerAdmin;
 			sourceTree = "<group>";
@@ -234,11 +234,11 @@
 		949538DE1B3891A000D4319C /* IHM */ = {
 			isa = PBXGroup;
 			children = (
+				94F6AEAE1B459066003A4F90 /* Home */,
 				94933B9E1B3D88C0000FE6B5 /* Détails */,
 				94933B9A1B3D45A0000FE6B5 /* Zones */,
 				94F417F91B393D750032ECCB /* Administration */,
 				949538E41B3892CC00D4319C /* Login */,
-				949538E31B3892C600D4319C /* Home */,
 			);
 			name = IHM;
 			sourceTree = "<group>";
@@ -257,15 +257,6 @@
 			name = Entites;
 			sourceTree = "<group>";
 		};
-		949538E31B3892C600D4319C /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				949538BF1B38914000D4319C /* HomeViewController.h */,
-				949538C01B38914000D4319C /* HomeViewController.m */,
-			);
-			name = Home;
-			sourceTree = "<group>";
-		};
 		949538E41B3892CC00D4319C /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -280,8 +271,6 @@
 			children = (
 				949538E51B3894D300D4319C /* User.h */,
 				949538E61B3894D300D4319C /* User.m */,
-				94F417F61B393D1F0032ECCB /* Client.h */,
-				94F417F71B393D1F0032ECCB /* Client.m */,
 				949538E81B3899FD00D4319C /* Administator.h */,
 				949538E91B3899FD00D4319C /* Administator.m */,
 			);
@@ -295,6 +284,23 @@
 				94F417FB1B393DA10032ECCB /* AdministrationViewController.m */,
 			);
 			name = Administration;
+			sourceTree = "<group>";
+		};
+		94F6AEA61B4573A0003A4F90 /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				94F6AEA71B4573AD003A4F90 /* appli_ic.png */,
+			);
+			name = Ressources;
+			sourceTree = "<group>";
+		};
+		94F6AEAE1B459066003A4F90 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				94F6AEAF1B459070003A4F90 /* HomeViewController.h */,
+				94F6AEB01B459070003A4F90 /* HomeViewController.m */,
+			);
+			name = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,9 +388,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94F6AEA81B4573AD003A4F90 /* appli_ic.png in Resources */,
+				94F6AEAC1B4578D3003A4F90 /* Images.xcassets in Resources */,
 				949538C41B38914000D4319C /* Main.storyboard in Resources */,
 				949538C91B38914000D4319C /* LaunchScreen.xib in Resources */,
-				949538C61B38914000D4319C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,8 +415,6 @@
 				943343531B3BE62000C5B265 /* AFSecurityPolicy.m in Sources */,
 				949538EA1B3899FD00D4319C /* Administator.m in Sources */,
 				943343501B3BE62000C5B265 /* AFHTTPRequestOperationManager.m in Sources */,
-				949538C11B38914000D4319C /* HomeViewController.m in Sources */,
-				94F417F81B393D1F0032ECCB /* Client.m in Sources */,
 				949538BE1B38914000D4319C /* AppDelegate.m in Sources */,
 				94F417F41B39358C0032ECCB /* LoginViewController.m in Sources */,
 				94E5004B1B4145A500367EB9 /* NoteTableViewCell.m in Sources */,
@@ -421,6 +426,7 @@
 				949538BB1B38914000D4319C /* main.m in Sources */,
 				943343551B3BE62100C5B265 /* AFURLRequestSerialization.m in Sources */,
 				9433435A1B3C31AB00C5B265 /* Coordinates.m in Sources */,
+				94F6AEB11B459070003A4F90 /* HomeViewController.m in Sources */,
 				943343521B3BE62000C5B265 /* AFNetworkReachabilityManager.m in Sources */,
 				949538F01B38A2DD00D4319C /* Note.m in Sources */,
 				9433434F1B3BE62000C5B265 /* AFHTTPRequestOperation.m in Sources */,

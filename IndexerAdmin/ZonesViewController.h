@@ -14,13 +14,17 @@
 
 @interface ZonesViewController : UIViewController <ZoneManagement, UITableViewDataSource, UITableViewDelegate>
 
-
 @property Administator * user;
 @property Zone * zoneNeeded;
 @property Note * noteNeeded;
 @property (strong, nonatomic) IBOutlet UITableView * zonesTableView;
 @property (strong, nonatomic) IBOutlet UISegmentedControl * zoneStateSelector;
 
+/**
+ *
+ *  Select the Zones wich have to be displaied (Enable, disable, All)
+ *
+ */
 - (IBAction)clickZoneStateSelector:(id)sender;
 
 @end

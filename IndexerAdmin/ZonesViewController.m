@@ -21,12 +21,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.zoneStateSelector setSelectedSegmentIndex:1];
     zoneArray = [[NSMutableArray alloc] init];
     zoneDisplay = [[NSMutableArray alloc] init];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
+    
+    // Clear all the data and reload them
+    [self.zoneStateSelector setSelectedSegmentIndex:1];
     [zoneArray removeAllObjects];
     [Zone getAllZonesWithSender:self];
 }
@@ -63,9 +65,9 @@
     destinationSegue.selectedZone = [zoneDisplay objectAtIndex:selectedRow];
 }
 
-#pragma mark CallBack Protocole Zone
+#pragma mark Zone Protocole
 
-- (void)getZone:(id)zone {
+- (void)zoneWasGetting:(id)zone {
     self.zoneNeeded = (Zone *)zone;
 }
 
@@ -73,6 +75,8 @@
     
     [zoneDisplay removeAllObjects];
     [zoneArray removeAllObjects];
+    
+    // Display the enables Zones and display them in the TableView
     for (int i = 0; i < allZones.count; i++) {
         Zone * newZone = [allZones objectAtIndex:i];
         [zoneArray addObject:newZone];
@@ -83,13 +87,10 @@
     [self.zonesTableView reloadData];
 }
 
-- (void) zoneCreated {
-    
-}
-
 - (IBAction)clickZoneStateSelector:(id)sender {
     [zoneDisplay removeAllObjects];
     
+    // Change the displaied zones by them status (enable, disable)
     if (self.zoneStateSelector.selectedSegmentIndex == 2) {
         for (int i = 0; i < zoneArray.count; i ++) {
             if ([[[zoneArray objectAtIndex:i] used] isEqual:@0])
@@ -106,6 +107,5 @@
 
     [self.zonesTableView reloadData];
 }
-
 
 @end
