@@ -52,20 +52,6 @@
     
 }
 
-
-- (void) viewWillAppear:(BOOL)animated {
-    /**
-    [polygonPoints removeAllObjects];
-    [markerArray removeAllObjects];
-    [self.mapView removeAnnotations:self.mapView.annotations];
-    [self.mapView removeOverlays:self.mapView.overlays];
-    
-    
-    self.zoneNameTF.text = nil;
-    self.validateButton.enabled = NO;
-     **/
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -83,6 +69,19 @@
         mapZone.fillColor = [UIColor greenColor];
     
     return mapZone;
+}
+
+- (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
+    MKCoordinateRegion region;
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.005;
+    span.longitudeDelta = 0.005;
+    CLLocationCoordinate2D location;
+    location.latitude = aUserLocation.coordinate.latitude;
+    location.longitude = aUserLocation.coordinate.longitude;
+    region.span = span;
+    region.center = location;
+    [aMapView setRegion:region animated:YES];
 }
 
 - (void) onClickMap {
@@ -112,6 +111,7 @@
         [polygonPoints removeObjectAtIndex:polygonPoints.count-1];
         [self.mapView removeAnnotation:markerArray.lastObject];
         [markerArray removeLastObject];
+        [zone.pointsData removeLastObject];
         
         [self.mapView removeOverlay:polygon];
         polygon = [self drawPolygone:polygonPoints];
@@ -147,13 +147,10 @@
         [markerArray removeAllObjects];
         [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView removeOverlays:self.mapView.overlays];
-        
         [zone.pointsData removeAllObjects];
-        
         
         self.zoneNameTF.text = nil;
         self.validateButton.enabled = NO;
-    
     }
 }
 

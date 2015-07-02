@@ -23,6 +23,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.user = [[User alloc] init];
+    [self.loader setHidden:YES];
+    [self.loader setHidesWhenStopped:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,8 +34,9 @@
 
 - (IBAction)clickConnexionBTN:(id)sender {
 
-    NSString *mail = self.mailTF.text;
+    NSString * mail = self.mailTF.text;
     [User getUserByMail:mail sender:self];
+    [self.loader startAnimating];
 }
 
 /* ----------------- CALLBACK PROTOCOL ------------------ */
@@ -64,6 +67,7 @@
         [self performSegueWithIdentifier:@"goToUser" sender:self];
     }
     
+    [self.loader stopAnimating];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

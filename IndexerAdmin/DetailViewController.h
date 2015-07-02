@@ -17,6 +17,7 @@
 @interface DetailViewController : UIViewController <MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource, NoteManagement>
 
 @property Zone * selectedZone;
+@property (strong, nonatomic) IBOutlet UIButton *deleteButton;
 @property (strong, nonatomic) IBOutlet UITableView * noteTableView;
 @property (strong, nonatomic) IBOutlet MKMapView * zoneMapView;
 @property (strong, nonatomic) IBOutlet UIButton *updateButton;

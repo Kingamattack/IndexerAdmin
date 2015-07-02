@@ -18,13 +18,15 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="00q-tg-hcu">
-                                <rect key="frame" x="266" y="266" width="69" height="30"/>
+                                <rect key="frame" x="257" y="263" width="88" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Utilisateur">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FG5-k4-wKh">
-                                <rect key="frame" x="250" y="304" width="100" height="30"/>
+                                <rect key="frame" x="236" y="301" width="129" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Administrateur">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -74,27 +76,27 @@
                                 </connections>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eb3-tN-9Cz">
-                                <rect key="frame" x="220" y="79" width="161" height="29"/>
+                                <rect key="frame" x="219" y="79" width="164" height="29"/>
                                 <segments>
-                                    <segment title="Red"/>
-                                    <segment title="Yellow"/>
-                                    <segment title="Green"/>
+                                    <segment title="Rouge"/>
+                                    <segment title="Jaune"/>
+                                    <segment title="Vert"/>
                                 </segments>
                                 <connections>
                                     <action selector="clickZoneSelector:" destination="qeO-bM-10D" eventType="valueChanged" id="uO2-zZ-Lio"/>
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mPl-8s-Lam">
-                                <rect key="frame" x="431" y="79" width="54" height="30"/>
-                                <state key="normal" title="Validate">
+                                <rect key="frame" x="433" y="79" width="47" height="30"/>
+                                <state key="normal" title="Valider">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="clickValidateButton:" destination="qeO-bM-10D" eventType="touchUpInside" id="qdG-V6-0ZS"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nom de la zone" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vkn-Rn-y3E">
-                                <rect key="frame" x="20" y="79" width="150" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nom de la zone " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vkn-Rn-y3E">
+                                <rect key="frame" x="19" y="79" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="rm7-Qf-7ee"/>
                                 </constraints>
@@ -105,8 +107,8 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYF-xC-7bX">
-                                <rect key="frame" x="266" y="117" width="78" height="30"/>
-                                <state key="normal" title="Delete Last">
+                                <rect key="frame" x="255" y="117" width="101" height="30"/>
+                                <state key="normal" title="Effacer dernier">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -140,6 +142,7 @@
                                         <fragment content="Zones">
                                             <attributes>
                                                 <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                             </attributes>
                                         </fragment>
                                     </attributedString>
@@ -176,9 +179,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Kq2-2l-gmW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Kq2-2l-gmW">
                                 <rect key="frame" x="0.0" y="117" width="600" height="483"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="zoneCell" textLabel="9o3-r7-VCA" detailTextLabel="6CQ-yf-com" style="IBUITableViewCellStyleValue1" id="NZC-Ys-iih">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
@@ -211,11 +215,11 @@
                                 </connections>
                             </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rYu-jx-hks">
-                                <rect key="frame" x="211" y="84" width="179" height="29"/>
+                                <rect key="frame" x="190" y="84" width="221" height="29"/>
                                 <segments>
-                                    <segment title="All"/>
-                                    <segment title="Enable"/>
-                                    <segment title="Disable"/>
+                                    <segment title="Tout"/>
+                                    <segment title="Active"/>
+                                    <segment title="Desactive"/>
                                 </segments>
                                 <connections>
                                     <action selector="clickZoneStateSelector:" destination="3Rd-FV-MXl" eventType="valueChanged" id="iSU-jj-6ak"/>
@@ -254,7 +258,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pUi-AI-Pil">
-                                <rect key="frame" x="5" y="104" width="500" height="451"/>
+                                <rect key="frame" x="5" y="104" width="500" height="441"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="500" id="qXi-Iv-6mJ"/>
                                 </constraints>
@@ -262,9 +266,9 @@
                                     <outlet property="delegate" destination="n2Q-lb-mhQ" id="6hC-qw-Y1D"/>
                                 </connections>
                             </mapView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="152" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="lio-R7-kJq">
-                                <rect key="frame" x="296" y="104" width="304" height="451"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="lio-R7-kJq">
+                                <rect key="frame" x="510" y="104" width="90" height="441"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noteID" rowHeight="152" id="L8n-7k-O3y" customClass="NoteTableViewCell">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
@@ -272,24 +276,24 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L8n-7k-O3y" id="uxt-OQ-bTz">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nom note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gkk-8V-zK8">
-                                                    <rect key="frame" x="13" y="13" width="91" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gkk-8V-zK8">
+                                                    <rect key="frame" x="13" y="13" width="101" height="24"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e82-32-NSH">
                                                     <rect key="frame" x="13" y="37" width="200" height="1"/>
-                                                    <color key="backgroundColor" red="0.2784313725" green="0.14901960780000001" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="200" id="1qw-dc-Xjc"/>
                                                         <constraint firstAttribute="height" constant="1" id="ssw-l8-a1I"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contenu de la note" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bc-Di-V5x">
-                                                    <rect key="frame" x="13" y="43" width="278" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note content" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Bc-Di-V5x">
+                                                    <rect key="frame" x="13" y="43" width="64" height="41"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -316,12 +320,12 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwa-XS-uGg">
-                                <rect key="frame" x="0.0" y="560" width="600" height="40"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="gRK-mT-Hju"/>
+                                    <constraint firstAttribute="height" constant="50" id="gRK-mT-Hju"/>
                                 </constraints>
-                                <state key="normal" title="Désactiver zone">
+                                <state key="normal" title="Disable area">
                                     <color key="titleColor" red="1" green="0.28953130440000002" blue="0.23517737320000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -329,7 +333,7 @@
                                     <action selector="clickDeleteButton:" destination="n2Q-lb-mhQ" eventType="touchUpInside" id="m8g-vX-lGe"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Nom de la zone" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PSG-Yf-U7C">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Area name" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PSG-Yf-U7C">
                                 <rect key="frame" x="200" y="69" width="200" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="tUt-AS-k4l"/>
@@ -359,7 +363,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wJ2-03-wpV">
                                 <rect key="frame" x="-23" y="-15" width="133" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Valider">
+                                <state key="normal" title="Validate">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -369,6 +373,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="deleteButton" destination="Qwa-XS-uGg" id="xMs-pk-HzD"/>
                         <outlet property="noteTableView" destination="lio-R7-kJq" id="btD-Ad-FJd"/>
                         <outlet property="updateButton" destination="wJ2-03-wpV" id="Qve-Pe-j2B"/>
                         <outlet property="zoneMapView" destination="pUi-AI-Pil" id="Jhd-B4-68n"/>
@@ -390,6 +395,49 @@
                     <view key="view" contentMode="scaleToFill" id="BXZ-On-ycg">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Pl-yv-0Ps">
+                                <rect key="frame" x="451" y="448" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ePE-nL-pCb">
+                                <rect key="frame" x="423" y="476" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wv7-vB-2jy">
+                                <rect key="frame" x="42" y="196" width="300" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="vrM-uM-W3D">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vrM-uM-W3D" id="cGM-hP-gPb">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wbX-rv-tHF" id="I21-BM-ddd"/>
+                                    <outlet property="delegate" destination="wbX-rv-tHF" id="aLA-5D-Yfn"/>
+                                </connections>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nom utilisateur" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ly-f1-HgW">
+                                <rect key="frame" x="42" y="89" width="116" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dernière zone connue" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X2y-wo-gYP">
+                                <rect key="frame" x="370" y="89" width="168" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="lqW-yT-px5"/>
@@ -451,10 +499,15 @@
                                     <action selector="clickConnexionBTN:" destination="HIo-77-Yua" eventType="touchUpInside" id="HhN-rg-XuK"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2RW-1b-5f6">
+                                <rect key="frame" x="291" y="405" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="eR6-zQ-kYc" secondAttribute="centerX" constant="-0.5" id="2xP-Jl-vGA"/>
+                            <constraint firstAttribute="centerX" secondItem="2RW-1b-5f6" secondAttribute="centerX" constant="-1" id="Dom-nu-6nO"/>
+                            <constraint firstItem="2RW-1b-5f6" firstAttribute="top" secondItem="YRy-fj-gWy" secondAttribute="bottom" constant="5" id="Gvs-I1-tq0"/>
                             <constraint firstAttribute="centerY" secondItem="eR6-zQ-kYc" secondAttribute="centerY" constant="-26" id="NEH-s5-2Nt"/>
                             <constraint firstAttribute="centerY" secondItem="YRy-fj-gWy" secondAttribute="centerY" constant="-85" id="NHY-QK-dun"/>
                             <constraint firstAttribute="centerY" secondItem="U8T-4c-94w" secondAttribute="centerY" constant="39" id="UdB-Al-Mdj"/>
@@ -465,6 +518,7 @@
                     <navigationItem key="navigationItem" id="pxJ-qJ-xzR"/>
                     <connections>
                         <outlet property="connexionBTN" destination="YRy-fj-gWy" id="IDM-LU-aM8"/>
+                        <outlet property="loader" destination="2RW-1b-5f6" id="qVR-04-1y6"/>
                         <outlet property="mailTF" destination="U8T-4c-94w" id="hKh-Kn-i7t"/>
                         <outlet property="passwordTF" destination="eR6-zQ-kYc" id="ecB-2E-ezs"/>
                         <segue destination="vXZ-lx-hvc" kind="show" identifier="goToHome" id="qJs-CK-fVX"/>

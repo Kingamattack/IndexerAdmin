@@ -22,10 +22,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    if ([self.selectedZone.used isEqual:@0]) {
+        [self.deleteButton setTitle:@"Activer zone" forState:UIControlStateNormal];
+        [self.deleteButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    }
+    
+    self.zoneMapView.showsUserLocation = YES;
+    self.zoneMapView.delegate = self;
+    
     noteArray = [[NSMutableArray alloc] init];
     polygonPoints = [[NSMutableArray alloc] init];
     polygon = [self drawPolygone:polygonPoints];
     self.zoneNameTF.text = self.selectedZone.zoneName;
+    [self zoomToFitMapAnnotations];
     [Note getAllNotesFromZone:self.selectedZone.zoneID sender:self];
 }
 
@@ -44,13 +53,42 @@
     Note * aNote = [noteArray objectAtIndex:indexPath.row];
     aCell.noteZoneName.text = aNote.noteName;
     aCell.noteZoneContent.text = aNote.content;
-    //aCell.separatorView.layer.frame.size.width = aCell.noteZoneName.layer.frame.size.width;
 
     return aCell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return @"Notes de la zone";
+}
+
+- (void) zoomToFitMapAnnotations {
+    if([self.zoneMapView.annotations count] == 0)
+        return;
+    
+    CLLocationCoordinate2D topLeftCoord;
+    topLeftCoord.latitude = -90;
+    topLeftCoord.longitude = 180;
+    
+    CLLocationCoordinate2D bottomRightCoord;
+    bottomRightCoord.latitude = 90;
+    bottomRightCoord.longitude = -180;
+    
+    for(MKPointAnnotation * annotation in self.zoneMapView.annotations) {
+        topLeftCoord.longitude = fmin(topLeftCoord.longitude, annotation.coordinate.longitude);
+        topLeftCoord.latitude = fmax(topLeftCoord.latitude, annotation.coordinate.latitude);
+        
+        bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, annotation.coordinate.longitude);
+        bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, annotation.coordinate.latitude);
+    }
+    
+    MKCoordinateRegion region;
+    region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
+    region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
+    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.1; // Add a little extra space on the sides
+    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.1; // Add a little extra space on the sides
+    
+    region = [self.zoneMapView regionThatFits:region];
+    [self.zoneMapView setRegion:region animated:YES];
 }
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id < MKOverlay >)overlay {
@@ -92,21 +130,36 @@
 }
 
 - (IBAction)clickUpdateButton:(id)sender {
-    //if ([self.updateButton.titleLabel.text isEqualToString:@"Modifier"]) {
+    if (self.updateButton.titleLabel.text.length > 1) {
         
-        NSLog(@"Je suis là");
         self.selectedZone.zoneName = self.zoneNameTF.text;
         [self.selectedZone updateZone];
-   // }
-    
+        
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Modification zone"
+                                                         message:[NSString stringWithFormat:@"Zone %@ modifiée.", self.selectedZone.zoneName]
+                                                        delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
+    }
 }
 
 - (IBAction)clickDeleteButton:(id)sender {
-    [self.selectedZone disableZone];
+    UIAlertView * alert;
     
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Suppression zone"
-                                                     message:[NSString stringWithFormat:@"Zone %@ supprimée.", self.selectedZone.zoneName]
-                                                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    if ([self.selectedZone.used isEqual:@0]) {
+        
+        [self.selectedZone enableZone];
+        alert = [[UIAlertView alloc] initWithTitle:@"Activation zone"
+                                           message:[NSString stringWithFormat:@"Zone %@ activée.", self.selectedZone.zoneName]
+                                          delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    }else {
+        
+        [self.selectedZone disableZone];
+        alert = [[UIAlertView alloc] initWithTitle:@"Désactivation zone"
+                                           message:[NSString stringWithFormat:@"Zone %@ désactivée.", self.selectedZone.zoneName]
+                                          delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    }
+    
     [alert show];
 
     [self.navigationController popViewControllerAnimated:YES];
@@ -123,7 +176,7 @@
 
 - (void) didDownloadNoteListFromZone:(NSMutableArray *)allNotes {
 
-    NSLog(@" NOTEQ: %lu", (unsigned long)allNotes.count);
+    NSLog(@" NOTES: %lu", (unsigned long)allNotes.count);
     
     for (int i = 0; i < [allNotes count]; i++) {
         Note * newNote = [allNotes objectAtIndex:i];

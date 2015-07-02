@@ -16,6 +16,7 @@
 @property IBOutlet UITextField *mailTF;
 @property IBOutlet UITextField *passwordTF;
 @property IBOutlet UIButton *connexionBTN;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *loader;
 
 @property User *user;
 

@@ -10,6 +10,7 @@
 
 @interface ZonesViewController () {
     NSMutableArray * zoneArray;
+    NSMutableArray * zoneDisplay;
 }
 @end
 
@@ -22,6 +23,7 @@
     
     [self.zoneStateSelector setSelectedSegmentIndex:1];
     zoneArray = [[NSMutableArray alloc] init];
+    zoneDisplay = [[NSMutableArray alloc] init];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -37,13 +39,13 @@
 #pragma mark TableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [zoneArray count];
+    return [zoneDisplay count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell * aCell = [tableView dequeueReusableCellWithIdentifier:@"zoneCell" forIndexPath:indexPath];
     
-    Zone * aZone = [zoneArray objectAtIndex:indexPath.row];
+    Zone * aZone = [zoneDisplay objectAtIndex:indexPath.row];
     aCell.textLabel.text = aZone.zoneName; 
     aCell.detailTextLabel.text = aZone.zoneColor;
     
@@ -58,7 +60,7 @@
     DetailViewController * destinationSegue = segue.destinationViewController;
     
     NSUInteger selectedRow = self.zonesTableView.indexPathForSelectedRow.row;
-    destinationSegue.selectedZone = [zoneArray objectAtIndex:selectedRow];
+    destinationSegue.selectedZone = [zoneDisplay objectAtIndex:selectedRow];
 }
 
 #pragma mark CallBack Protocole Zone
@@ -68,27 +70,14 @@
 }
 
 - (void)getAllZones:(NSMutableArray *)allZones{
-    if (self.zoneStateSelector.selectedSegmentIndex == 0) {
-        for (int i = 0; i < allZones.count; i++) {
-            Zone * newZone = [allZones objectAtIndex:i];
-            [zoneArray addObject:newZone];
-        }
-    } else if (self.zoneStateSelector.selectedSegmentIndex == 1) {
-        for (int i = 0; i < allZones.count; i++) {
-            Zone * newZone = [allZones objectAtIndex:i];
-            
-            if ([newZone.used  isEqual: @"1"]) {
-                [zoneArray addObject:newZone];
-            }
-        }
-    }else {
-        for (int i = 0; i < allZones.count; i++) {
-            Zone * newZone = [allZones objectAtIndex:i];
-            
-            if ([newZone.used  isEqual: @"0"]) {
-                [zoneArray addObject:newZone];
-            }
-        }
+    
+    [zoneDisplay removeAllObjects];
+    [zoneArray removeAllObjects];
+    for (int i = 0; i < allZones.count; i++) {
+        Zone * newZone = [allZones objectAtIndex:i];
+        [zoneArray addObject:newZone];
+        if ([newZone.used isEqual:@1])
+            [zoneDisplay addObject:newZone];
     }
     
     [self.zonesTableView reloadData];
@@ -99,7 +88,24 @@
 }
 
 - (IBAction)clickZoneStateSelector:(id)sender {
-    [zoneArray removeAllObjects];
-    [Zone getAllZonesWithSender:self];
+    [zoneDisplay removeAllObjects];
+    
+    if (self.zoneStateSelector.selectedSegmentIndex == 2) {
+        for (int i = 0; i < zoneArray.count; i ++) {
+            if ([[[zoneArray objectAtIndex:i] used] isEqual:@0])
+                [zoneDisplay addObject:[zoneArray objectAtIndex:i]];
+        }
+        
+    }else if (self.zoneStateSelector.selectedSegmentIndex == 1) {
+        for (int i = 0; i < zoneArray.count; i ++) {
+            if ([[[zoneArray objectAtIndex:i] used] isEqual:@1])
+                [zoneDisplay addObject:[zoneArray objectAtIndex:i]];
+        }
+    }else
+        [zoneDisplay addObjectsFromArray:zoneArray];
+
+    [self.zonesTableView reloadData];
 }
+
+
 @end

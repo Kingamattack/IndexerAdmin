@@ -22,7 +22,9 @@
 
 - (void) createZone:(id<ZoneManagement>)sender;
 - (void) disableZone;
+- (void) enableZone;
 - (void) updateZone;
+- (void) perimeterToString;
 + (void) getZone:(NSNumber*)zoneId sender:(id<ZoneManagement>)sender;
 + (void) getAllZonesWithSender:(id<ZoneManagement>)sender;
 

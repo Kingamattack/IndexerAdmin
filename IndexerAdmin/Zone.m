@@ -78,6 +78,41 @@
      }];
 }
 
+- (void) enableZone {
+    NSString *url = @"http://pierre-mar.net/Zone_indexer/";
+    NSDictionary *parameters = @{@"enableZone":@1, @"id":self.zoneID};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    [manager
+     POST:url
+     parameters:parameters
+     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         NSLog(@"JSON: %@", responseObject);
+     }
+     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"ErrorPost: %@", error);
+     }];
+}
+
+- (void) perimeterToString {
+    NSString * stringFinal = @"[";
+    
+    for (int i = 0; i < self.pointsData.count; i ++) {
+        Coordinates *coord = [self.pointsData objectAtIndex:i];
+        NSString* virgule;
+        if(i == (self.pointsData.count - 1)){
+            virgule = @"]";
+        }
+        else{
+            virgule = @",";
+        }
+        stringFinal = [stringFinal stringByAppendingString:[NSString stringWithFormat:@"{ \"long\" : %@, \"lat\" : %@}%@", coord.longitude, coord.latitude, virgule]];
+    }
+    
+    self.perimeter = stringFinal;
+}
+
 + (void) getZone:(NSNumber*)zoneId sender:(id<ZoneManagement>)sender{
     NSString *url = @"http://pierre-mar.net/Zone_indexer/";
     NSDictionary *parameters = @{@"getZone":@1, @"id":zoneId};
@@ -105,6 +140,7 @@
              [zone.pointsData addObject:coordinate];
          }
          
+         [zone perimeterToString];
          [sender getZone:zone];
      }
      failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -133,7 +169,7 @@
              zone.zoneID = [jsonZone objectForKey:@"id"];
              zone.zoneColor = [jsonZone objectForKey:@"color"];
              zone.zoneName = [jsonZone objectForKey:@"title"];
-             zone.used = [jsonZone objectForKey:@"used"];
+             zone.used = [NSNumber numberWithInt:[[jsonZone objectForKey:@"used"] intValue]];
              NSArray* perimeter = [jsonZone objectForKey:@"perimeter"];
              
              for(int i = 0; i < perimeter.count; i++){
@@ -143,8 +179,7 @@
                  coordinate.longitude = [coord objectForKey:@"long"];
                  [zone.pointsData addObject:coordinate];
              }
-             
-             NSLog(@"PERIMETER: %@", zone.pointsData);
+             [zone perimeterToString];
              [allZones addObject:zone];
          }
          
